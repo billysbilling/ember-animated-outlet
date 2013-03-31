@@ -1,5 +1,7 @@
 * {
-    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 body {
@@ -86,6 +88,7 @@ h1 {
     border-bottom: 1px solid #000;
     font-weight: normal;
     text-align: center;
+    overflow: hidden;
 }
 h1 .back {
     position: absolute;
@@ -111,6 +114,7 @@ h1 .back:hover {
     right: 0px;
     bottom: 0px;
     left: 200px;
+    overflow: hidden;
 }
 
 .panel, .panel-outer {
@@ -119,6 +123,7 @@ h1 .back:hover {
     right: 0px;
     bottom: 0px;
     left: 0px;
+    overflow: hidden;
 }
 .panel, .panel-inner {
     padding: 20px;

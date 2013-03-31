@@ -112,6 +112,16 @@ You can use the following effects:
 
 Is your favorite effect missing? Fork the repo, send a pull request, and make other folks happy, too :-)
 
+
+## Tested in
+
+- OSX
+- - Chrome 26
+- - Safari 6.0.2
+- - Firefox 19
+
+If you experience issues in any browser, please [file an issue](https://github.com/billysbilling/ember-animated-outlet/issues).
+
 ## Things to be aware of
 
 - All child views of an `App.AnimatedOutletView` need to be explicitly defined, since the animations only work with non-virtual views.
@@ -156,5 +166,4 @@ Ember Animated Outlet is maintained by [Billy's Billing online accounting softwa
 ## Todo
 
 - Add tests
-- Setup travis
 - Deploy the demo app somewhere
