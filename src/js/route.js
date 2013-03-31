@@ -10,9 +10,10 @@ Ember.Route.reopen({
       @param model
       @param animations {Object} Animations to enqueue
     */
-    transitionToAnimated: function(name, model, animations) {
-        Ember.Handlebars.AnimatedOutletView.enqueueAnimations(animations);
-        return this.transitionTo(name, model);
+    transitionToAnimated: function(name, animations, model) {
+        Ember.AnimatedOutletView.enqueueAnimations(animations);
+        Array.prototype.splice.call(arguments, 1, 1);
+        return this.transitionTo.apply(this, arguments);
     },
 
     /**
@@ -25,9 +26,10 @@ Ember.Route.reopen({
       @param model
       @param animations {Object} Animations to enqueue
     */
-    replaceWithAnimated: function(name, model, animations) {
-        Ember.Handlebars.AnimatedOutletView.enqueueAnimations(animations);
-        return this.replaceWith(name, model);
+    replaceWithAnimated: function(name, animations, model) {
+        Ember.AnimatedOutletView.enqueueAnimations(animations);
+        Array.prototype.splice.call(arguments, 1, 1);
+        return this.replaceWith.apply(this, arguments);
     }
 
 });

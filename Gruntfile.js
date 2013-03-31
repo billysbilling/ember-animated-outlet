@@ -4,14 +4,17 @@ module.exports = function(grunt) {
         meta: {
             name: 'Ember Animated Outlet'
         },
-        requirejs: {
-            compile: {
-                options: {
-                    name: 'index',
-                    baseUrl: "src/js",
-//                    mainConfigFile: "path/to/config.js",
-                    out: "dist/ember-animated-outlet.js"
-                }
+        concat: {
+            dist: {
+                separator: '\n\n',
+                src: [
+                    'src/js/animated-outlet.js',
+                    'src/js/animated-outlet-helper.js',
+                    'src/js/route.js',
+                    'src/js/controller-mixin.js',
+                    'src/js/effects/*.js'
+                ],
+                dest: 'dist/ember-animated-outlet.js'
             }
         },
         uglify: {
@@ -23,7 +26,7 @@ module.exports = function(grunt) {
         compass: {
             dist: {
                 options: {
-                    sassDir: 'src/scss',
+                    sassDir: 'src/sass',
                     cssDir: 'dist',
                     environment: 'production'
                 }
@@ -38,7 +41,8 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-requirejs');
+//    grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-watch');

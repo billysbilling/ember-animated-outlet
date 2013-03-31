@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="./style.css"/>
-    <link rel="stylesheet" type="text/css" href="../dist/ember-animated-outlet.css"/>
+    <link rel="stylesheet" type="text/css" href="/demo/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/dist/ember-animated-outlet.css"/>
     
-    <script src="../vendor/jquery-1.9.0.js"></script>
-    <script src="../vendor/handlebars-1.0.rc.3.js"></script>
-    <script src="../vendor/ember.js"></script>
-    <script src="../vendor/ember-data.js"></script>
-    <script src="../dist/ember-animated-outlet.js"></script>
-    <script src="./app.js"></script>
+    <script src="/vendor/jquery-1.9.0.js"></script>
+    <script src="/vendor/handlebars-1.0.rc.3.js"></script>
+    <script src="/vendor/ember.js"></script>
+    <script src="/vendor/ember-data.js"></script>
+    <script src="/dist/ember-animated-outlet.js"></script>
+    <script src="/demo/app.js"></script>
     
     <meta charset=utf-8 />
     
@@ -19,10 +19,10 @@
 
 <script data-template-name="application" type="text/x-handlebars">
     <div class="menu">
+        <div class="title">Menu</div>
         <ul>
-            <li><a {{action goToIndex}}>Index</a></li>
+            <li><a {{action goToIndex}}>Overview</a></li>
             <li><a {{action goToInvoices}}>Invoices</a></li>
-            <li><a {{action goToBills}}>Bills</a></li>
             <li><a {{action goToContacts}}>Contacts</a></li>
         </ul>
     </div>
@@ -32,63 +32,67 @@
 </script>
 
 <script data-template-name="index" type="text/x-handlebars">
-    <h1>Ember.js Animated Transition Example</h1>
-    <p>Index</p>
+    <h1>Ember.js Animated Outlet Demo</h1>
+    <div class="panel">
+        <p>This is a demo of Ember Animated Demo. See the source code on <a href="https://github.com/billysbilling/ember-animated-outlet">GitHub</a>.</p>
+        <p>Clicking any item in the left menu will result in a fade animation.</p>
+        <p>Navigating between invoices and contacts will use the "slide left" effect. Pressing the Back link (currently no support for the browser's back button) will do a "slide right".</p>
+        <p>See an example of a flip animation by navigating to a <a {{action goToExampleContact}}>contact</a> and click "Show invoices".</p>
+    </div>
 </script>
 
-<script data-template-name="invoices" type="text/x-handlebars">
+<script data-template-name="invoices/index" type="text/x-handlebars">
     <h1>Invoices</h1>
-    <ul>
-        {{#each invoice in controller}}
-            <li><a {{action showInvoice invoice}}>Invoice #{{invoice.no}} to {{invoice.contact.name}}</a></li>
-        {{/each}}
-    </ul>
+    <div class="panel">
+        <ul>
+            {{#each invoice in controller}}
+                <li><a {{action showInvoice invoice}}>Invoice #{{invoice.no}} to {{invoice.contact.name}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
 </script>
 
-<script data-template-name="invoicesShow" type="text/x-handlebars">
-    <h1>Invoice #{{no}}</h1>
-    <p><a {{action goBack}}>&laquo; Back</a></p>
-    <p>Customer: <a {{action showContact contact}}>{{contact.name}}</a></p>
+<script data-template-name="invoices/show" type="text/x-handlebars">
+    <h1><a class="back" {{action goBack}}></a>Invoice #{{no}}</h1>
+    <div class="panel">
+        <p>Contact: <a {{action showContact contact}}>{{contact.name}}</a></p>
+        <p>Total amount: ${{amount}}</p>
+    </div>
 </script>
 
-<script data-template-name="bills" type="text/x-handlebars">
-    <h1>Bills</h1>
-    <ul>
-        {{#each bill in controller}}
-            <li><a {{action showBill bill}}>Bill from {{bill.contact.name}}: {{bill.description}}</a></li>
-        {{/each}}
-    </ul>
-</script>
-
-<script data-template-name="billsShow" type="text/x-handlebars">
-    <h1>Bill</h1>
-    <p><a {{action goBack}}>&laquo; Back</a></p>
-    <p>From: <a {{action showContact contact}}>{{contact.name}}</a></p>
-    <p>You bought: {{description}}</p>
-</script>
-
-<script data-template-name="contacts" type="text/x-handlebars">
+<script data-template-name="contacts/index" type="text/x-handlebars">
     <h1>Contacts</h1>
-    <ul>
-        {{#each contact in controller}}
-            <li><a {{action showContact contact}}>{{contact.name}}</a></li>
-        {{/each}}
-    </ul>
+    <div class="panel">
+        <ul>
+            {{#each contact in controller}}
+                <li><a {{action showContact contact}}>{{contact.name}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
 </script>
 
-<script data-template-name="contactsShow" type="text/x-handlebars">
-    <h1>{{name}}</h1>
-    <p><a {{action goBack}}>&laquo; Back</a></p>
-    <h1>Invoices</h1>
+<script data-template-name="contact" type="text/x-handlebars">
+    <h1><a class="back" {{action goBack}}></a>{{name}}</h1>
+    <div class="panel-outer">
+        {{animatedOutlet name="contact"}}
+    </div>
+</script>
+
+<script data-template-name="contact/info" type="text/x-handlebars">
+    <p><a {{action showContactInvoices}}>Flip to invoices</a></p>
+    <h2>Contact info</h2>
+    <p>
+        <b>{{name}}</b><br>
+        {{formattedAddress}}
+    </p>
+</script>
+
+<script data-template-name="contact/invoices" type="text/x-handlebars">
+    <p><a {{action showContactInfo}}>Flip to contact info</a></p>
+    <h2>Invoices</h2>
     <ul>
         {{#each invoice in invoices}}
             <li><a {{action showInvoice invoice}}>Invoice #{{invoice.no}} to {{invoice.contact.name}}</a></li>
-        {{/each}}
-    </ul>
-    <h2>Bills</h2>
-    <ul>
-        {{#each bill in bills}}
-            <li><a {{action showBill bill}}>Bill from {{bill.contact.name}}: {{bill.description}}</a></li>
         {{/each}}
     </ul>
 </script>

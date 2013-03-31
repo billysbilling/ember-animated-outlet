@@ -11,10 +11,9 @@ Ember.ControllerMixin.reopen({
       @param animations {Object} Animations to enqueue
     */
     transitionToRouteAnimated: function(name, model, animations) {
-        // target may be either another controller or a router
-        var target = get(this, 'target'),
-            method = target.transitionToRouteAnimated || target.transitionToAnimated;
-        return method.apply(target, arguments);
+        Ember.AnimatedOutletView.enqueueAnimations(animations);
+        Array.prototype.splice.call(arguments, 1, 1);
+        return this.transitionToRoute.apply(this, arguments);
     },
 
     /**
@@ -28,10 +27,9 @@ Ember.ControllerMixin.reopen({
       @param animations {Object} Animations to enqueue
     */
     replaceRouteAnimated: function(name, model, animations) {
-        // target may be either another controller or a router
-        var target = get(this, 'target'),
-            method = target.replaceRouteAnimated || target.replaceWithAnimated;
-        return method.apply(target, arguments);
+        Ember.AnimatedOutletView.enqueueAnimations(animations);
+        Array.prototype.splice.call(arguments, 1, 1);
+        return this.replaceRoute.apply(this, arguments);
     }
 
 });

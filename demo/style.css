@@ -4,21 +4,25 @@
 
 body {
     color: #444;
+    background-color: #000;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 14px;
     padding: 30px;
     margin: 0px;
 }
 
-h1 {
-    font-size: 24px;
-    line-height: 1.2em;
-    margin: 0px 0px 10px 0px;
+p {
+    margin: 0px 0px 15px 0px;
+}
+
+ul {
+    margin: 0px;
+    padding: 0px 0px 0px 15px;
 }
 
 a {
     cursor: pointer;
-    color: #1283cc;
+    color: #174b71;
     text-decoration: underline;
 }
 a:hover {
@@ -40,9 +44,15 @@ a:hover {
     bottom: 0px;
     left: 0px;
     width: 200px;
-    background-color: #222;
+    border-right: 1px solid #fff;
+    background-color: #003458;
     color: #fff;
-    padding: 20px;
+}
+.menu .title {
+    padding: 10px 20px;
+    line-height: 32px;
+    font-weight: bold;
+    text-align: center;
 }
 .menu ul {
     padding: 0px;
@@ -52,7 +62,46 @@ a:hover {
     list-style: none;
 }
 .menu a {
+    display: block;
+    padding: 10px 20px;
     color: #fff;
+    text-decoration: none;
+}
+.menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+h1 {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    height: 52px;
+    font-size: 24px;
+    line-height: 32px;
+    margin: 0px;
+    padding: 10px 20px;
+    background: #174b71;
+    color: #fff;
+    border-bottom: 1px solid #000;
+    font-weight: normal;
+    text-align: center;
+}
+h1 .back {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    margin: 0;
+    border-top: 10px solid transparent;
+    border-left: 0;
+    border-right: 20px solid #fff;
+    border-bottom: 10px solid transparent;
+    padding: 0;
+    width: 0;
+    height: 0;
+}
+h1 .back:hover {
+    border-right-color: rgba(255, 255, 255, .85);
 }
 
 .content {
@@ -62,5 +111,16 @@ a:hover {
     right: 0px;
     bottom: 0px;
     left: 200px;
-    
+}
+
+.panel, .panel-outer {
+    position: absolute;
+    top: 52px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+.panel, .panel-inner {
+    padding: 20px;
+    background-color: #fff;
 }

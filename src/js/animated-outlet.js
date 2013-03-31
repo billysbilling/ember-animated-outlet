@@ -7,10 +7,11 @@
 */
 Ember.AnimatedOutletView = Ember.ContainerView.extend({
 
+    classNames: ['ember-animated-outlet'],
+    
     init: function() {
         this._super();
         //Register this view, so queued effects can be related with this view by name
-        tlog(this.get('name'));
         Ember.AnimatedOutletView._views[this.get('name')] = this;
     },
     
@@ -38,9 +39,11 @@ Ember.AnimatedOutletView = Ember.ContainerView.extend({
             this.pushObject(newView);
             //Only animate if there is both a new view and an old view
             if (oldView) {
+                Ember.assert('Ember.AnimatedOutletView can only animate non-virtual views. You need to explicitly define your view class.', !oldView.isVirtual);
+                Ember.assert('Ember.AnimatedOutletView can only animate non-virtual views. You need to explicitly define your view class.', !newView.isVirtual);
                 //Get and validate a potentially queued effect
                 var effect = Ember.AnimatedOutletView._animationQueue[name];
-                if (next && !Ember.AnimatedOutletView._effects[effect]) {
+                if (effect && !Ember.AnimatedOutletView._effects[effect]) {
                     Ember.warn('Unknown animation effect: '+effect);
                     effect = null;
                 }
@@ -114,7 +117,7 @@ Ember.AnimatedOutletView.reopenClass({
       @param {Function} callback The function to call when effect has to be executed
     */
     registerEffect: function(effect, callback) {
-        
+        this._effects[effect] = callback;
     }
 
 });
