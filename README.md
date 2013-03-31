@@ -42,8 +42,8 @@ in the `<head>`.
 
 ### Use `{{animatedOutlet}}` instead of `{{outlet}}`
 
-In those outlets where you'd like to use animation, use the `{{animatedOutlet}}` helper instead of `{{outlet}}`, which
-you'd normally use. You need to give the outlet a name. Example:
+In those outlets where you would like to use animation, use the `{{animatedOutlet}}` helper instead of `{{outlet}}`, which
+you would normally use. You need to give the outlet a name. Example:
 
 ```handlebars
 <h1>Ember Animated Outlet Example</h1>
@@ -52,9 +52,9 @@ you'd normally use. You need to give the outlet a name. Example:
 
 ### Use `transitionToAnimated` instead of `transitionTo`
 
-In your JavaScript code where you'd normally write `transitionTo` in your routes to transition to another route, you
+In your JavaScript code where you would normally write `transitionTo` in your routes to transition to another route, you
 should use `transitionToAnimated` instead. `transitionToAnimated` takes an extra argument, `animations`, which should be the second
-argument right after the route of the name to transition to.
+argument right after the name of the route to transition to.
 
 `animations` should be a hash with outlet names (the one you set in `{{animatedOutlet}}`) as keys and effect names as keys.
 
@@ -75,8 +75,7 @@ There are `*Animated` versions of all the different ways you can transition betw
 | `Ember.Controller` | `transitionToRoute(name, model)` | `transitionToRouteAnimated(name, animations, model)` |
 | `Ember.Controller` | `replaceRoute(name, model)` | `replaceRouteAnimated(name, animations, model)` |
 
-You can also programmatically enqueue an animation for an outlet. An example is when a route event should fire a history
-back event.
+You can also programmatically enqueue an animation for an outlet. A good example is when manually manipulating the `history`.
  
 ```javascript
 App.ApplicationRoute = Ember.Route.extend({
@@ -87,7 +86,7 @@ App.ApplicationRoute = Ember.Route.extend({
 });
 ```
 
-You can have as many `{{animatedOutlet}}`s as you'd like. Normally a route change will only need one animation.
+You can have as many `{{animatedOutlet}}`s as you would like. In most cases a route transition will only include one animation.
 But since the `animations` argument is a hash, you can enqueue multiple animations:
 
 ```javascript
@@ -106,10 +105,10 @@ You can use the following effects:
 
 | Effect name | Description |
 | ----------- | ----------- | 
-| `fade` | A slide animation where the views towards the left side of the screen. |
-| `flip` | A slide animation where the views towards the left side of the screen. |
+| `fade` | The old view will be faded out, revealing the new view underneath it. |
+| `flip` | Using CSS3 to perform a 3D flip. |
 | `slideLeft` | A slide animation where the views towards the left side of the screen. |
-| `slideRight` | A slide animation where the views towards the Right side of the screen. |
+| `slideRight` | A slide animation where the views towards the right side of the screen. |
 
 Is your favorite effect missing? Fork the repo, send a pull request, and make other folks happy, too :-)
 
@@ -118,9 +117,10 @@ Is your favorite effect missing? Fork the repo, send a pull request, and make ot
 - All child views of an `App.AnimatedOutletView` need to be explicitly defined, since the animations only work with non-virtual views.
   This means that if you have a route called `invoices.show` and you expect to animate into it, you need to define the view for it:
   `App.InvoicesShowView = Ember.View.extend()`
-- The `{{animatedOutlet}}` helper should be contained in an element that has `position: relative`. It will automatically size itself
-  to be 100% width and 100% height of the parent.
-- Pressing the back button will not perform any animation, unless you tap into the Ember code that handles the popState/hashchange event.
+- The `{{animatedOutlet}}` helper should be contained in an element that has `position: relative`. It is absolutely positioned
+  (set to top:0 and left:0) and will automatically size itself to be 100% width and 100% height of the parent.
+- Pressing the browser's back button will not perform any animation, unless you tap into the Ember code that handles
+  the `popstate`/`hashchange` event.
 
 
 ## Building and testing
@@ -132,7 +132,7 @@ To be able to build and test you need to have the following installed:
 - [Node.js](http://nodejs.org/)
 - The NPM package `grunt-cli` (can be installed via `npm install -g grunt-cli`, [see more here](http://gruntjs.com/getting-started))
 
-Run `npm install` to install dependencies.
+Run `npm install` from the project direction to install dependencies.
 
 ### Building
 
@@ -150,7 +150,7 @@ You can run tests by opening `tests.html` in your browser throught the `file://`
 
 ## Authors
 
-Ember Animated Outlet is maintained by [Billy's Billing](http://billysbilling.com/) online accounting software.
+Ember Animated Outlet is maintained by [Billy's Billing online accounting software](http://billysbilling.com/).
 
 
 ## Todo
