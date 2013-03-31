@@ -1,0 +1,31 @@
+.ember-animated-outlet-wrap-flip {
+    -webkit-perspective: 1000;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+}
+.animated-transition-outlet-flip {
+    -webkit-transition: 0.6s;
+    -webkit-transform-style: preserve-3d;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.animated-transition-outlet-flip.animated-transition-outlet-flip-flipped {
+    -webkit-transform: rotateY(180deg);
+}
+.animated-transition-view-flip-front, .animated-transition-view-flip-back {
+    -webkit-backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+.animated-transition-view-flip-front {
+    z-index: 2;
+}
+.animated-transition-view-flip-back {
+    -webkit-transform: rotateY(180deg);
+}

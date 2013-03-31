@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    color: #444;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    padding: 30px;
+    margin: 0px;
+}
+
+h1 {
+    font-size: 24px;
+    line-height: 1.2em;
+    margin: 0px 0px 10px 0px;
+}
+
+a {
+    cursor: pointer;
+    color: #1283cc;
+    text-decoration: underline;
+}
+a:hover {
+    text-decoration: none;
+}
+
+.application {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+
+.menu {
+    z-index: 2;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: 200px;
+    background-color: #222;
+    color: #fff;
+    padding: 20px;
+}
+.menu ul {
+    padding: 0px;
+    margin: 0px;
+}
+.menu li {
+    list-style: none;
+}
+.menu a {
+    color: #fff;
+}
+
+.content {
+    z-index: 1;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 200px;
+    
+}
