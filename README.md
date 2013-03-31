@@ -1,4 +1,4 @@
-# Ember Animated Outlet
+# Ember Animated Outlet [![Build Status](https://travis-ci.org/billysbilling/ember-animated-outlet.png?branch=master)](https://travis-ci.org/billysbilling/ember-animated-outlet)
 
 Ember Animated Outlet is a plug'n'play library to support animated transitions in [Ember.js](http://emberjs.com/).
 
