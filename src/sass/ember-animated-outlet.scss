@@ -1,11 +1,11 @@
 @import "compass";
 
-.ember-animated-outlet {
+.ember-animated-container {
     position: absolute;
     height: 100%;
     width: 100%;
 }
-.ember-animated-outlet > div {
+.ember-animated-container > div {
     position: absolute;
     top: 0;
     left: 0;

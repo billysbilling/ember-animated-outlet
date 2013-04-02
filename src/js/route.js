@@ -11,7 +11,7 @@ Ember.Route.reopen({
       @param animations {Object} Animations to enqueue
     */
     transitionToAnimated: function(name, animations, model) {
-        Ember.AnimatedOutletView.enqueueAnimations(animations);
+        Ember.AnimatedContainerView.enqueueAnimations(animations);
         Array.prototype.splice.call(arguments, 1, 1);
         return this.transitionTo.apply(this, arguments);
     },
@@ -27,7 +27,7 @@ Ember.Route.reopen({
       @param animations {Object} Animations to enqueue
     */
     replaceWithAnimated: function(name, animations, model) {
-        Ember.AnimatedOutletView.enqueueAnimations(animations);
+        Ember.AnimatedContainerView.enqueueAnimations(animations);
         Array.prototype.splice.call(arguments, 1, 1);
         return this.replaceWith.apply(this, arguments);
     }

@@ -1,18 +1,18 @@
-Ember.AnimatedOutletView.registerEffect('flip', function(outlet, newView, oldView) {
+Ember.AnimatedContainerView.registerEffect('flip', function(outlet, newView, oldView) {
     var outletEl = outlet.$(),
         newEl = newView.$(),
         oldEl = oldView.$();
-    outletEl.wrap('<div class="ember-animated-outlet-flip-wrap"></div>')
-    outletEl.addClass('ember-animated-outlet-flip-outlet');
-    newEl.addClass('ember-animated-outlet-flip-back');
-    oldEl.addClass('ember-animated-outlet-flip-front');
+    outletEl.wrap('<div class="ember-animated-container-flip-wrap"></div>')
+    outletEl.addClass('ember-animated-container-flip-outlet');
+    newEl.addClass('ember-animated-container-flip-back');
+    oldEl.addClass('ember-animated-container-flip-front');
     setTimeout(function() {
-        outletEl.addClass('ember-animated-outlet-flip-outlet-flipped');
+        outletEl.addClass('ember-animated-container-flip-outlet-flipped');
         outletEl.one('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
             outletEl.unwrap();
-            outletEl.removeClass('ember-animated-outlet-flip-outlet-flipped');
-            outletEl.removeClass('ember-animated-outlet-flip-outlet');
-            newEl.removeClass('ember-animated-outlet-flip-back');
+            outletEl.removeClass('ember-animated-container-flip-outlet-flipped');
+            outletEl.removeClass('ember-animated-container-flip-outlet');
+            newEl.removeClass('ember-animated-container-flip-back');
             outlet.removeObject(oldView);
         });
     }, 0);

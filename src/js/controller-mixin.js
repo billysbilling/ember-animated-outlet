@@ -7,11 +7,11 @@ Ember.ControllerMixin.reopen({
       `animations` should be an object with outlet names as keys and effect names as value.
      
       @param name
-      @param animations {Object} Animations to enqueue
       @param model
+      @param animations {Object} Animations to enqueue
     */
     transitionToRouteAnimated: function(name, animations, model) {
-        Ember.AnimatedOutletView.enqueueAnimations(animations);
+        Ember.AnimatedContainerView.enqueueAnimations(animations);
         Array.prototype.splice.call(arguments, 1, 1);
         return this.transitionToRoute.apply(this, arguments);
     },
@@ -23,11 +23,11 @@ Ember.ControllerMixin.reopen({
       `animations` should be an object with outlet names as keys and effect names as value.
 
       @param name
-      @param animations {Object} Animations to enqueue
       @param model
+      @param animations {Object} Animations to enqueue
     */
     replaceRouteAnimated: function(name, animations, model) {
-        Ember.AnimatedOutletView.enqueueAnimations(animations);
+        Ember.AnimatedContainerView.enqueueAnimations(animations);
         Array.prototype.splice.call(arguments, 1, 1);
         return this.replaceRoute.apply(this, arguments);
     }

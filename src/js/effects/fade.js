@@ -1,4 +1,4 @@
-Ember.AnimatedOutletView.registerEffect('fade', function(outlet, newView, oldView) {
+Ember.AnimatedContainerView.registerEffect('fade', function(outlet, newView, oldView) {
     var outletEl = outlet.$(),
         newEl = newView.$(),
         oldEl = oldView.$();
@@ -7,8 +7,8 @@ Ember.AnimatedOutletView.registerEffect('fade', function(outlet, newView, oldVie
     oldEl.stop().animate({
         opacity: 0
     }, function() {
-        outletEl.removeClass('ember-animated-outlet-fade-outlet');
-        newEl.removeClass('ember-animated-outlet-fade-view-new');
+        outletEl.removeClass('ember-animated-container-fade-outlet');
+        newEl.removeClass('ember-animated-container-fade-view-new');
         outlet.removeObject(oldView);
     });
 });

@@ -23,11 +23,11 @@ var slide = function(outlet, newView, oldView, direction) {
     });
 };
     
-Ember.AnimatedOutletView.registerEffect('slideLeft', function(outlet, newView, oldView) {
+Ember.AnimatedContainerView.registerEffect('slideLeft', function(outlet, newView, oldView) {
     slide(outlet, newView, oldView, 'left');
 });
 
-Ember.AnimatedOutletView.registerEffect('slideRight', function(outlet, newView, oldView) {
+Ember.AnimatedContainerView.registerEffect('slideRight', function(outlet, newView, oldView) {
     slide(outlet, newView, oldView, 'right');
 });
 

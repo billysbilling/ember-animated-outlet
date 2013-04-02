@@ -8,7 +8,7 @@ module.exports = function(grunt) {
             dist: {
                 separator: '\n\n',
                 src: [
-                    'src/js/animated-outlet.js',
+                    'src/js/animated-container-view.js',
                     'src/js/animated-outlet-helper.js',
                     'src/js/route.js',
                     'src/js/controller-mixin.js',

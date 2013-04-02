@@ -1,24 +1,24 @@
 /**
   Write me...
  
-  @class AnimatedOutletView
+  @class AnimatedContainerView
   @namespace Ember
   @extends Ember.ContainerView
 */
-Ember.AnimatedOutletView = Ember.ContainerView.extend({
+Ember.AnimatedContainerView = Ember.ContainerView.extend({
 
-    classNames: ['ember-animated-outlet'],
+    classNames: ['ember-animated-container'],
     
     init: function() {
         this._super();
         //Register this view, so queued effects can be related with this view by name
-        Ember.AnimatedOutletView._views[this.get('name')] = this;
+        Ember.AnimatedContainerView._views[this.get('name')] = this;
     },
     
     willDestroy: function() {
         this._super();
         //Clean up
-        delete Ember.AnimatedOutletView._views[this.get('name')];
+        delete Ember.AnimatedContainerView._views[this.get('name')];
     },
     
     //Override parent method
@@ -39,19 +39,19 @@ Ember.AnimatedOutletView = Ember.ContainerView.extend({
             this.pushObject(newView);
             //Only animate if there is both a new view and an old view
             if (oldView) {
-                Ember.assert('Ember.AnimatedOutletView can only animate non-virtual views. You need to explicitly define your view class.', !oldView.isVirtual);
-                Ember.assert('Ember.AnimatedOutletView can only animate non-virtual views. You need to explicitly define your view class.', !newView.isVirtual);
+                Ember.assert('Ember.AnimatedContainerView can only animate non-virtual views. You need to explicitly define your view class.', !oldView.isVirtual);
+                Ember.assert('Ember.AnimatedContainerView can only animate non-virtual views. You need to explicitly define your view class.', !newView.isVirtual);
                 //Get and validate a potentially queued effect
-                var effect = Ember.AnimatedOutletView._animationQueue[name];
-                if (effect && !Ember.AnimatedOutletView._effects[effect]) {
+                var effect = Ember.AnimatedContainerView._animationQueue[name];
+                if (effect && !Ember.AnimatedContainerView._effects[effect]) {
                     Ember.warn('Unknown animation effect: '+effect);
                     effect = null;
                 }
                 if (effect) {
                     //If an effect is queued, then start the effect when the new view has been inserted
-                    delete Ember.AnimatedOutletView._animationQueue[name];
+                    delete Ember.AnimatedContainerView._animationQueue[name];
                     newView.on('didInsertElement', function() {
-                        Ember.AnimatedOutletView._effects[effect](self, newView, oldView);
+                        Ember.AnimatedContainerView._effects[effect](self, newView, oldView);
                     });
                 } else {
                     //If there is no effect queued, then just remove the old view (as would normally happen in a ContainerView)
@@ -65,7 +65,7 @@ Ember.AnimatedOutletView = Ember.ContainerView.extend({
 
 });
 
-Ember.AnimatedOutletView.reopenClass({
+Ember.AnimatedContainerView.reopenClass({
     
     /**
       All animated outlets registers itself in this hash
@@ -109,7 +109,7 @@ Ember.AnimatedOutletView.reopenClass({
      
       The `callback` function will be passed the following parameters:
      
-      - The `Ember.AnimatedOutletView` instance.
+      - The `Ember.AnimatedContainerView` instance.
       - The new view.
       - The old view.
 

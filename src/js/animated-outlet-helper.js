@@ -24,5 +24,5 @@ Handlebars.registerHelper('animatedOutlet', function(property, options) {
     options.hash.currentViewBinding = '_view.outletSource._outlets.' + property;
 
     //Only this line has been changed
-    return Ember.Handlebars.helpers.view.call(this, Ember.AnimatedOutletView, options);
+    return Ember.Handlebars.helpers.view.call(this, Ember.AnimatedContainerView, options);
 });

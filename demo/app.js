@@ -44,7 +44,7 @@ App.ApplicationRoute = Ember.Route.extend({
             this.replaceWithAnimated('contact.invoices', {contact: 'flip'});
         },
         goBack: function() {
-            Ember.AnimatedOutletView.enqueueAnimations({main: 'slideRight'});
+            Ember.AnimatedContainerView.enqueueAnimations({main: 'slideRight'});
             window.history.go(-1);
         }
     }
