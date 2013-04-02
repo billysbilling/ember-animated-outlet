@@ -10,9 +10,11 @@ app.use('/vendor', express.static(__dirname + '/../vendor'));
 
 app.get('/', function(req, res, callback) {
     childProcess.exec('grunt', function(err, output) {
-        console.log(err);
-        console.log(output);
-        if (err) return callback(err);
+        if (err) {
+            console.log('Grunt error:');
+            console.log(output);
+            return callback(err);
+        }
         fs.readFile(__dirname + '/index.html', 'utf8', function(err, html){
             if (err) return callback(err);
             res.send(html);
