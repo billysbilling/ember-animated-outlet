@@ -7,8 +7,8 @@ Ember.Route.reopen({
       `animations` should be an object with outlet names as keys and effect names as value.
 
       @param name
-      @param model
       @param animations {Object} Animations to enqueue
+      @param model
     */
     transitionToAnimated: function(name, animations, model) {
         Ember.AnimatedContainerView.enqueueAnimations(animations);
@@ -23,8 +23,8 @@ Ember.Route.reopen({
       `animations` should be an object with outlet names as keys and effect names as value.
 
       @param name
-      @param model
       @param animations {Object} Animations to enqueue
+      @param model
     */
     replaceWithAnimated: function(name, animations, model) {
         Ember.AnimatedContainerView.enqueueAnimations(animations);
