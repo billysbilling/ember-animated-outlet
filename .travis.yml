@@ -1,4 +1,4 @@
 before_script:
   - npm install
-  - node tests/server.js
-script: "phantomjs tests/cli-runner.js"
+  - node tests/server.js &
+script: phantomjs tests/cli-runner.js
