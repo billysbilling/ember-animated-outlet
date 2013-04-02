@@ -10,5 +10,6 @@ Ember.AnimatedContainerView.registerEffect('fade', function(outlet, newView, old
         outletEl.removeClass('ember-animated-container-fade-outlet');
         newEl.removeClass('ember-animated-container-fade-view-new');
         outlet.removeObject(oldView);
+        oldView.destroy();
     });
 });

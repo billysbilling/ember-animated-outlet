@@ -18,7 +18,9 @@ Ember.AnimatedContainerView = Ember.ContainerView.extend({
     willDestroy: function() {
         this._super();
         //Clean up
-        delete Ember.AnimatedContainerView._views[this.get('name')];
+        var name = this.get('name');
+        delete Ember.AnimatedContainerView._views[name];
+        delete Ember.AnimatedContainerView._animationQueue[name];
     },
     
     //Override parent method
@@ -56,12 +58,17 @@ Ember.AnimatedContainerView = Ember.ContainerView.extend({
                 } else {
                     //If there is no effect queued, then just remove the old view (as would normally happen in a ContainerView)
                     this.removeObject(oldView);
+                    oldView.destroy();
                 }
                 //Forget about the old view
                 this.set('oldView', null);
             }
         }
-    }, 'currentView')
+    }, 'currentView'),
+
+    enqueueAnimation: function(effect) {
+        Ember.AnimatedContainerView._animationQueue[this.get('name')] = effect;
+    }
 
 });
 

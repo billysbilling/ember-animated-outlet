@@ -14,6 +14,7 @@ Ember.AnimatedContainerView.registerEffect('flip', function(outlet, newView, old
             outletEl.removeClass('ember-animated-container-flip-outlet');
             newEl.removeClass('ember-animated-container-flip-back');
             outlet.removeObject(oldView);
+            oldView.destroy();
         });
     }, 0);
 });

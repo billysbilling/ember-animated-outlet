@@ -20,6 +20,7 @@ var slide = function(outlet, newView, oldView, direction) {
         outletEl.css('left', outletOriginalLeft);
         newEl.css('left', newElOriginalLeft);
         outlet.removeObject(oldView);
+        oldView.destroy();
     });
 };
     
