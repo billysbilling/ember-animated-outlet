@@ -80,7 +80,7 @@ You can also programmatically enqueue an animation for an outlet. A good example
 ```javascript
 App.ApplicationRoute = Ember.Route.extend({
     goBack: function(invoice) {
-        Ember.AnimatedOutletView.enqueueAnimations({main: 'slideRight'});
+        Ember.AnimatedContainerView.enqueueAnimations({main: 'slideRight'});
         history.go(-1);
     }
 });
@@ -124,7 +124,7 @@ If you experience issues in any browser, please [file an issue](https://github.c
 
 ## Things to be aware of
 
-- All child views of an `App.AnimatedOutletView` need to be explicitly defined, since the animations only work with non-virtual views.
+- All child views of an `App.AnimatedContainerView` need to be explicitly defined, since the animations only work with non-virtual views.
   This means that if you have a route called `invoices.show` and you expect to animate into it, you need to define the view for it:
   `App.InvoicesShowView = Ember.View.extend()`
 - The `{{animatedOutlet}}` helper should be contained in an element that has `position: relative`. It is absolutely positioned
@@ -154,7 +154,7 @@ The build process will place the files `ember-animated-outlet.js`, `ember-animat
 
 ### Testing
 
-You can run tests by opening `tests.html` in your browser throught the `file://` protocol. The test suite uses
+You can run tests by opening `tests.html` in your browser through the `file://` protocol. The test suite uses
 [QUnit](http://qunitjs.com/).
 
 
@@ -166,4 +166,7 @@ Ember Animated Outlet is maintained by [Billy's Billing online accounting softwa
 ## Todo
 
 - Add tests
+- Write missing jsdoc for some classes 
+- Documentation of using Ember.AnimatedContainerView programmatically
+- Fixup the demo design, too 90ish
 - Deploy the demo app somewhere
