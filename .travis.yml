@@ -1,1 +1,4 @@
-script: "phantomjs test-runner.js"
+before_script:
+  - npm install
+  - node tests/server.js
+script: "phantomjs tests/cli-runner.js"

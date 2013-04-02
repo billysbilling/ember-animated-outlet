@@ -31,7 +31,7 @@ function checkDone() {
     phantom.exit(details.failed ? 1 : 0);
 }
 
-var url = 'file://localhost'+require('fs').workingDirectory+'/tests.html';
+var url = 'http://localhost:7846/';
 page.open(url, function(status) {
     if (status !== 'success') {
         console.log('Could not open '+url);
