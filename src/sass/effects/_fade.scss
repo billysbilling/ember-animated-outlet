@@ -1,0 +1,13 @@
+.ember-animated-container-fade-old {
+    @include transition-property(opacity);
+    @include transition-duration(0.5s);
+    z-index: 2;
+    @include opacity(1);
+}
+.ember-animated-container-fade-old-fading {
+    @include opacity(0);
+}
+
+.ember-animated-container-fade-new {
+    z-index: 1;
+}

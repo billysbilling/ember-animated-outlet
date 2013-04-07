@@ -1,15 +1,14 @@
-Ember.AnimatedContainerView.registerEffect('fade', function(outlet, newView, oldView) {
-    var outletEl = outlet.$(),
-        newEl = newView.$(),
+Ember.AnimatedContainerView.registerEffect('fade', function(ct, newView, oldView) {
+    var newEl = newView.$(),
         oldEl = oldView.$();
-    newEl.css({zIndex: 1});
-    oldEl.css({zIndex: 2});
-    oldEl.stop().animate({
-        opacity: 0
-    }, function() {
-        outletEl.removeClass('ember-animated-container-fade-outlet');
-        newEl.removeClass('ember-animated-container-fade-view-new');
-        outlet.removeObject(oldView);
-        oldView.destroy();
-    });
+    newEl.addClass('ember-animated-container-fade-new');
+    oldEl.addClass('ember-animated-container-fade-old');
+    setTimeout(function() {
+        oldEl.addClass('ember-animated-container-fade-old-fading');
+        oldEl.one('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
+            newEl.removeClass('ember-animated-container-fade-new');
+            ct.removeObject(oldView);
+            oldView.destroy();
+        });
+    }, 0);
 });
