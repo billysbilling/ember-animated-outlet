@@ -1,22 +1,22 @@
-.ember-animated-container-slide-ct {
+.ember-animated-container-slide-left-ct, .ember-animated-container-slide-right-ct {
     @include transition-property(transform);
     @include transition-duration(0.4s);
     @include transition-timing-function(ease-out);
     @include transform(translateX(0%));
 }
 
-.ember-animated-container-slide-ct-sliding-left {
+.ember-animated-container-slide-left-ct-sliding {
     @include transform(translateX(-100%));
-    
-    .ember-animated-container-slide-new {
-        left: 100%;
-    }
 }
 
-.ember-animated-container-slide-ct-sliding-right {
+.ember-animated-container-slide-right-ct-sliding {
     @include transform(translateX(100%));
+}
 
-    .ember-animated-container-slide-new {
-        left: -100%;
-    }
+.ember-animated-container-slide-left-new {
+    left: 100% !important;
+}
+
+.ember-animated-container-slide-right-new {
+    left: -100% !important;
 }

@@ -3,14 +3,14 @@
 var slide = function(ct, newView, oldView, direction) {
     var ctEl = ct.$(),
         newEl = newView.$();
-    ctEl.addClass('ember-animated-container-slide-ct');
-    newEl.addClass('ember-animated-container-slide-new');
+    ctEl.addClass('ember-animated-container-slide-'+direction+'-ct');
+    newEl.addClass('ember-animated-container-slide-'+direction+'-new');
     setTimeout(function() {
-        ctEl.addClass('ember-animated-container-slide-ct-sliding-'+direction);
+        ctEl.addClass('ember-animated-container-slide-'+direction+'-ct-sliding');
         ctEl.one('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
-            ctEl.removeClass('ember-animated-container-slide-ct');
-            ctEl.removeClass('ember-animated-container-slide-ct-sliding-'+direction);
-            newEl.removeClass('ember-animated-container-slide-new');
+            ctEl.removeClass('ember-animated-container-slide-'+direction+'-ct');
+            ctEl.removeClass('ember-animated-container-slide-'+direction+'-ct-sliding');
+            newEl.removeClass('ember-animated-container-slide-'+direction+'-new');
             ct.removeObject(oldView);
             oldView.destroy();
         });
