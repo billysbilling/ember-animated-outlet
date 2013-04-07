@@ -2,8 +2,7 @@
     
 var slide = function(ct, newView, oldView, direction) {
     var ctEl = ct.$(),
-        newEl = newView.$(),
-        oldEl = oldView.$();
+        newEl = newView.$();
     ctEl.addClass('ember-animated-container-slide-ct');
     newEl.addClass('ember-animated-container-slide-new');
     setTimeout(function() {
