@@ -1,35 +1,29 @@
 (function() {
     
-var slide = function(outlet, newView, oldView, direction) {
-    var outletEl = outlet.$(),
-        outletWidth = outletEl.outerWidth(),
-        outletOriginalLeft = outletEl.css('left'),
+var slide = function(ct, newView, oldView, direction) {
+    var ctEl = ct.$(),
         newEl = newView.$(),
-        newElOriginalLeft = newEl.css('left'),
-        animateLeft;
-    if (direction == 'left') {
-        newEl.css('left', outletWidth+'px');
-        animateLeft = -outletWidth;
-    } else {
-        newEl.css('left', (-outletWidth)+'px');
-        animateLeft = outletWidth;
-    }
-    outletEl.stop().animate({
-        left: animateLeft
-    }, function() {
-        outletEl.css('left', outletOriginalLeft);
-        newEl.css('left', newElOriginalLeft);
-        outlet.removeObject(oldView);
-        oldView.destroy();
-    });
+        oldEl = oldView.$();
+    ctEl.addClass('ember-animated-container-slide-ct');
+    newEl.addClass('ember-animated-container-slide-new');
+    setTimeout(function() {
+        ctEl.addClass('ember-animated-container-slide-ct-sliding-'+direction);
+        ctEl.one('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
+            ctEl.removeClass('ember-animated-container-slide-ct');
+            ctEl.removeClass('ember-animated-container-slide-ct-sliding-'+direction);
+            newEl.removeClass('ember-animated-container-slide-new');
+            ct.removeObject(oldView);
+            oldView.destroy();
+        });
+    }, 0);
 };
     
-Ember.AnimatedContainerView.registerEffect('slideLeft', function(outlet, newView, oldView) {
-    slide(outlet, newView, oldView, 'left');
+Ember.AnimatedContainerView.registerEffect('slideLeft', function(ct, newView, oldView) {
+    slide(ct, newView, oldView, 'left');
 });
 
-Ember.AnimatedContainerView.registerEffect('slideRight', function(outlet, newView, oldView) {
-    slide(outlet, newView, oldView, 'right');
+Ember.AnimatedContainerView.registerEffect('slideRight', function(ct, newView, oldView) {
+    slide(ct, newView, oldView, 'right');
 });
 
 })();

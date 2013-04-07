@@ -1,0 +1,22 @@
+.ember-animated-container-slide-ct {
+    @include transition-property(transform);
+    @include transition-duration(0.4s);
+    @include transition-timing-function(ease-out);
+    @include transform(translateX(0%));
+}
+
+.ember-animated-container-slide-ct-sliding-left {
+    @include transform(translateX(-100%));
+    
+    .ember-animated-container-slide-new {
+        left: 100%;
+    }
+}
+
+.ember-animated-container-slide-ct-sliding-right {
+    @include transform(translateX(100%));
+
+    .ember-animated-container-slide-new {
+        left: -100%;
+    }
+}
