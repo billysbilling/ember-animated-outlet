@@ -1,11 +1,13 @@
 # Ember Animated Outlet [![Build Status](https://travis-ci.org/billysbilling/ember-animated-outlet.png?branch=master)](https://travis-ci.org/billysbilling/ember-animated-outlet)
 
-Ember Animated Outlet is a plug'n'play library to support animated transitions in [Ember.js](http://emberjs.com/).
+Ember Animated Outlet is a plug'n'play module to support animated transitions in [Ember.js](http://emberjs.com/).
+
+The module is maintained by [Billy's Billing online accounting software](http://billysbilling.com/).
 
 
 ## Demo
 
-Comming...
+You can see a live demo here: [ember-animated-outlet-demo.herokuapp.com](http://ember-animated-outlet-demo.herokuapp.com/).
 
 
 ## How to use
@@ -158,15 +160,11 @@ You can run tests by opening `tests.html` in your browser through the `file://` 
 [QUnit](http://qunitjs.com/).
 
 
-## Authors
-
-Ember Animated Outlet is maintained by [Billy's Billing online accounting software](http://billysbilling.com/).
-
-
 ## Todo
 
-- Add tests
+- Use css animation for slide
+- Fixup the demo design, too 90ish
+- Tests
+- - Is there a better way than to use `setTimeout` to wait for animations to finish?
 - Write missing jsdoc for some classes 
 - Documentation of using Ember.AnimatedContainerView programmatically
-- Fixup the demo design, too 90ish
-- Deploy the demo app somewhere
