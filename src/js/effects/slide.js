@@ -7,13 +7,13 @@ var slide = function(ct, newView, oldView, direction) {
     newEl.addClass('ember-animated-container-slide-'+direction+'-new');
     setTimeout(function() {
         ctEl.addClass('ember-animated-container-slide-'+direction+'-ct-sliding');
-        ctEl.one('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
+        setTimeout(function() {
             ctEl.removeClass('ember-animated-container-slide-'+direction+'-ct');
             ctEl.removeClass('ember-animated-container-slide-'+direction+'-ct-sliding');
             newEl.removeClass('ember-animated-container-slide-'+direction+'-new');
             ct.removeObject(oldView);
             oldView.destroy();
-        });
+        }, 450);
     }, 0);
 };
     

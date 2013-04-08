@@ -8,13 +8,13 @@ Ember.AnimatedContainerView.registerEffect('flip', function(ct, newView, oldView
     oldEl.addClass('ember-animated-container-flip-old');
     setTimeout(function() {
         ctEl.addClass('ember-animated-container-flip-ct-flipping');
-        ctEl.one('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
+        setTimeout(function() {
             ctEl.unwrap();
-            ctEl.removeClass('ember-animated-container-flip-ct-flipping');
             ctEl.removeClass('ember-animated-container-flip-ct');
+            ctEl.removeClass('ember-animated-container-flip-ct-flipping');
             newEl.removeClass('ember-animated-container-flip-new');
             ct.removeObject(oldView);
             oldView.destroy();
-        });
+        }, 650);
     }, 0);
 });

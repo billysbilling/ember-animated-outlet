@@ -5,10 +5,10 @@ Ember.AnimatedContainerView.registerEffect('fade', function(ct, newView, oldView
     oldEl.addClass('ember-animated-container-fade-old');
     setTimeout(function() {
         oldEl.addClass('ember-animated-container-fade-old-fading');
-        oldEl.one('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
+        setTimeout(function() {
             newEl.removeClass('ember-animated-container-fade-new');
             ct.removeObject(oldView);
             oldView.destroy();
-        });
+        }, 550);
     }, 0);
 });
