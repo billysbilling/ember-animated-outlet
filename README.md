@@ -149,7 +149,7 @@ To be able to build and test you need to have the following installed:
 - [Node.js](http://nodejs.org/)
 - The NPM package `grunt-cli` (can be installed via `npm install -g grunt-cli`, [see more here](http://gruntjs.com/getting-started))
 
-Run `npm install` from the project direction to install dependencies.
+Run `npm install` from the project directory to install dependencies.
 
 ### Building
 
