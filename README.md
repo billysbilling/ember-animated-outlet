@@ -107,10 +107,10 @@ You can use the following effects:
 
 | Effect name | Description |
 | ----------- | ----------- | 
-| `fade` | The old view will be faded out, revealing the new view underneath it. |
+| `fade` | The old view will be faded out, revealing the new view underneath it. Uses CSS transitions. |
 | `flip` | Using CSS3 to perform a 3D flip. |
-| `slideLeft` | A slide animation where the views towards the left side of the screen. |
-| `slideRight` | A slide animation where the views towards the right side of the screen. |
+| `slideLeft` | A slide animation where the views slide towards the left side of the screen. Uses CSS transitions. |
+| `slideRight` | A slide animation where the views slide towards the right side of the screen. Uses CSS transitions. |
 
 Is your favorite effect missing? Fork the repo, send a pull request, and make other folks happy, too :-)
 
@@ -132,8 +132,9 @@ If you experience issues in any browser, please [file an issue](https://github.c
 - All child views of an `App.AnimatedContainerView` need to be explicitly defined, since the animations only work with non-virtual views.
   This means that if you have a route called `invoices.show` and you expect to animate into it, you need to define the view for it:
   `App.InvoicesShowView = Ember.View.extend()`
-- The `{{animatedOutlet}}` helper should be contained in an element that has `position: relative`. It is absolutely positioned
-  (set to top:0 and left:0) and will automatically size itself to be 100% width and 100% height of the parent.
+- The `{{animatedOutlet}}` helper should be contained in an element that has `position: relative`. The outlet element is
+  automatically absolutely positioned (set to top:0 and left:0) and will automatically size itself to be 100% width and
+  100% height of the parent.
 - Pressing the browser's back button will not perform any animation, unless you tap into the Ember code that handles
   the `popstate`/`hashchange` event.
 
@@ -151,7 +152,7 @@ Run `npm install` from the project direction to install dependencies.
 
 ### Building
 
-You can build the project simply by running `grunt` in your browser. If you want to let Grunt watch your files, so it 
+You can build the project simply by running `grunt` in your terminal. If you want to let Grunt watch your files, so it 
 automatically builds every time you change something, you can run `grunt watch`.
 
 The build process will place the files `ember-animated-outlet.js`, `ember-animated-outlet.min.js` and
@@ -159,13 +160,21 @@ The build process will place the files `ember-animated-outlet.js`, `ember-animat
 
 ### Testing
 
-You can run tests by opening `tests.html` in your browser through the `file://` protocol. The test suite uses
-[QUnit](http://qunitjs.com/).
+You can run tests by starting the test server:
+
+```
+node tests/server.js
+```
+
+And then open `http://localhost:7846/` in your browser.
+
+The test suite uses [QUnit](http://qunitjs.com/).
 
 
 ## Todo
 
+- Upload dist files somewhere
 - Tests
-- - Is there a better way than to use `setTimeout` to wait for animations to finish?
+-- Is there a better way than to use `setTimeout` to wait for animations to finish?
 - Write missing jsdoc for some classes 
 - Documentation of using Ember.AnimatedContainerView programmatically
