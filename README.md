@@ -119,12 +119,12 @@ Is your favorite effect missing? Fork the repo, send a pull request, and make ot
 ## Tested in
 
 - OSX
-- - Chrome 26
-- - Safari 6.0.2
-- - Firefox 19
+    - Chrome 26
+    - Safari 6.0.2
+    - Firefox 19
 - iOS
-- - Chrome 25
-- - Safari 6.0
+    - Chrome 25
+    - Safari 6.0
 
 If you experience issues in any browser, please [file an issue](https://github.com/billysbilling/ember-animated-outlet/issues).
 
@@ -174,8 +174,7 @@ The test suite uses [QUnit](http://qunitjs.com/).
 
 ## Todo
 
-- Upload dist files somewhere
 - Tests
--- Is there a better way than to use `setTimeout` to wait for animations to finish?
+    - Is there a better way than to use `setTimeout` to wait for animations to finish?
 - Write missing jsdoc for some classes 
 - Documentation of using Ember.AnimatedContainerView programmatically
