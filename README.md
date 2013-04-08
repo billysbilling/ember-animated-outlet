@@ -162,8 +162,6 @@ You can run tests by opening `tests.html` in your browser through the `file://` 
 
 ## Todo
 
-- Use css animation for slide
-- Fixup the demo design, too 90ish
 - Tests
 - - Is there a better way than to use `setTimeout` to wait for animations to finish?
 - Write missing jsdoc for some classes 
