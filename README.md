@@ -121,6 +121,9 @@ Is your favorite effect missing? Fork the repo, send a pull request, and make ot
 - - Chrome 26
 - - Safari 6.0.2
 - - Firefox 19
+- iOS
+- - Chrome 25
+- - Safari 6.0
 
 If you experience issues in any browser, please [file an issue](https://github.com/billysbilling/ember-animated-outlet/issues).
 
