@@ -1,6 +1,6 @@
 # Ember Animated Outlet [![Build Status](https://travis-ci.org/billysbilling/ember-animated-outlet.png?branch=master)](https://travis-ci.org/billysbilling/ember-animated-outlet)
 
-Ember Animated Outlet is a plug'n'play module to support animated transitions in [Ember.js](http://emberjs.com/).
+Ember Animated Outlet is a plug'n'play module to support animated route transitions in [Ember.js](http://emberjs.com/).
 
 The module is maintained by [Billy's Billing online accounting software](http://billysbilling.com/).
 
