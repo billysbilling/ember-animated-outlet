@@ -50,7 +50,7 @@ you would normally use. You need to give the outlet a name. Example:
 
 ```handlebars
 <h1>Ember Animated Outlet Example</h1>
-{{animatedOutlet name="main"}
+{{animatedOutlet name="main"}}
 ```
 
 ### Use `transitionToAnimated` instead of `transitionTo`
