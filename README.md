@@ -136,6 +136,7 @@ If you experience issues in any browser, please [file an issue](https://github.c
 - The `{{animatedOutlet}}` helper should be contained in an element that has `position: relative`. The outlet element is
   automatically absolutely positioned (set to top:0 and left:0) and will automatically size itself to be 100% width and
   100% height of the parent.
+- The animations use CSS transitions. There is no fallback for older browsers (yet).  
 - Pressing the browser's back button will not perform any animation, unless you tap into the Ember code that handles
   the `popstate`/`hashchange` event.
 
