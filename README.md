@@ -175,6 +175,7 @@ The test suite uses [QUnit](http://qunitjs.com/).
 
 ## Todo
 
+- "Freeze" the exiting view, so its content won't be changed by e.g. a controller change.
 - Tests
     - Is there a better way than to use `setTimeout` to wait for animations to finish?
 - Write missing jsdoc for some classes 
