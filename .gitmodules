@@ -1,3 +1,4 @@
 [submodule "demo"]
 	path = demo
-	url = git@github.com:billysbilling/ember-animated-outlet-demo.git
+	url = git://github.com/billysbilling/ember-animated-outlet-demo.git
+	
