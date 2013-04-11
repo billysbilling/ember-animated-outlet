@@ -105,6 +105,11 @@ Ember.AnimatedContainerView = Ember.ContainerView.extend({
 
     enqueueAnimation: function(effect) {
         Ember.AnimatedContainerView._animationQueue[this.get('name')] = effect;
+    },
+    
+    setCurrentViewAnimated: function(currentView, effect) {
+        this.enqueueAnimation(effect);
+        this.set('currentView', currentView);
     }
 
 });

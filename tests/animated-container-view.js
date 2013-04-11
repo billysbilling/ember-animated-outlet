@@ -101,8 +101,7 @@ test('Should animate through Ember.AnimatedContainerView.enqueueAnimations', fun
         }
     });
     Ember.run(function() {
-        Ember.AnimatedContainerView.enqueueAnimations({foo: 'fade'});
-        ct.set('currentView', newView);
+        ct.setCurrentViewAnimated(newView, 'fade');
     });
     equal(Ember.$.trim(ct.$().text()), 'Slide, and jump!Now chase the rat!', 'Container has both views\'s texts.');
 });
@@ -133,8 +132,7 @@ effects.forEach(function(effect) {
             }
         });
         Ember.run(function() {
-            ct.enqueueAnimation(effect);
-            ct.set('currentView', newView);
+            ct.setCurrentViewAnimated(newView, effect);
         });
         equal(Ember.$.trim(ct.$().text()), 'Slide, and jump!Now chase the rat!', 'Container has both views\'s texts.');
         //Sleep 1 second to allow the animation to finish
@@ -166,8 +164,7 @@ asyncTest('Queuing multiple animations', function() {
         }
     });
     Ember.run(function() {
-        ct.enqueueAnimation('slideLeft');
-        ct.set('currentView', view2);
+        ct.setCurrentViewAnimated(view2, 'slideLeft');
     });
     setTimeout(function() {
         var view3 = Ember.View.create({
@@ -176,8 +173,7 @@ asyncTest('Queuing multiple animations', function() {
             }
         });
         Ember.run(function() {
-            ct.enqueueAnimation('slideLeft');
-            ct.set('currentView', view3);
+            ct.setCurrentViewAnimated(view3, 'slideLeft');
         });
         var view4 = Ember.View.create({
             template: function() {
@@ -185,8 +181,7 @@ asyncTest('Queuing multiple animations', function() {
             }
         });
         Ember.run(function() {
-            ct.enqueueAnimation('slideLeft');
-            ct.set('currentView', view4);
+            ct.setCurrentViewAnimated(view4, 'slideLeft');
         });
         equal(Ember.$.trim(ct.$().text()), 'Slide, and jump!Now chase the rat!', 'Container still has only the two first views\'s texts.');
         //Sleep 450ms to allow the first animation to finish
