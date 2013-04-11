@@ -59,7 +59,7 @@ In your JavaScript code where you would normally write `transitionTo` in your ro
 should use `transitionToAnimated` instead. `transitionToAnimated` takes an extra argument, `animations`, which should be the second
 argument right after the name of the route to transition to.
 
-`animations` should be a hash with outlet names (the one you set in `{{animatedOutlet}}`) as keys and effect names as keys.
+`animations` should be a hash with outlet names (the one you set in `{{animatedOutlet}}`) as keys and effect names as values.
 
 ```javascript
 App.ApplicationRoute = Ember.Route.extend({
