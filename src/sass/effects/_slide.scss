@@ -3,6 +3,10 @@
     @include transition-duration(0.4s);
     @include transition-timing-function(ease-out);
     @include transform(translateX(0%));
+    
+    &.ember-animated-container-slide-slow-ct {
+        @include transition-duration(2s);
+    }
 }
 
 .ember-animated-container-slide-left-ct-sliding {

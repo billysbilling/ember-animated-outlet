@@ -1,4 +1,4 @@
-Ember.AnimatedContainerView.registerEffect('flip', function(ct, newView, oldView) {
+Ember.AnimatedContainerView.registerEffect('flip', function(ct, newView, oldView, callback) {
     var ctEl = ct.$(),
         newEl = newView.$(),
         oldEl = oldView.$();
@@ -13,8 +13,7 @@ Ember.AnimatedContainerView.registerEffect('flip', function(ct, newView, oldView
             ctEl.removeClass('ember-animated-container-flip-ct');
             ctEl.removeClass('ember-animated-container-flip-ct-flipping');
             newEl.removeClass('ember-animated-container-flip-new');
-            ct.removeObject(oldView);
-            oldView.destroy();
+            callback();
         }, 650);
     }, 0);
 });

@@ -95,16 +95,16 @@ test('Should animate through Ember.AnimatedContainerView.enqueueAnimations', fun
     Ember.run(function() {
         ct.appendTo('#qunit-fixture');
     });
-    Ember.AnimatedContainerView.enqueueAnimations({foo: 'fade'});
     var newView = Ember.View.create({
         template: function() {
             return 'Now chase the rat!';
         }
     });
     Ember.run(function() {
+        Ember.AnimatedContainerView.enqueueAnimations({foo: 'fade'});
         ct.set('currentView', newView);
     });
-    equal(Ember.$.trim(ct.$().text()), 'Slide, and jump!Now chase the rat!', 'View has both views\'s texts.');
+    equal(Ember.$.trim(ct.$().text()), 'Slide, and jump!Now chase the rat!', 'Container has both views\'s texts.');
 });
 
 var effects = [
@@ -127,16 +127,16 @@ effects.forEach(function(effect) {
         Ember.run(function() {
             ct.appendTo('#qunit-fixture');
         });
-        ct.enqueueAnimation(effect);
         var newView = Ember.View.create({
             template: function() {
                 return 'Now chase the rat!';
             }
         });
         Ember.run(function() {
+            ct.enqueueAnimation(effect);
             ct.set('currentView', newView);
         });
-        equal(Ember.$.trim(ct.$().text()), 'Slide, and jump!Now chase the rat!', 'View has both views\'s texts.');
+        equal(Ember.$.trim(ct.$().text()), 'Slide, and jump!Now chase the rat!', 'Container has both views\'s texts.');
         //Sleep 1 second to allow the animation to finish
         setTimeout(function() {
             equal(Ember.$.trim(ct.$().text()), 'Now chase the rat!', 'Only the new view\'s text is left.');
@@ -144,4 +144,61 @@ effects.forEach(function(effect) {
             start();
         }, 1000);
     });
+});
+
+
+asyncTest('Queuing multiple animations', function() {
+    var view1 = Ember.View.create({
+        template: function() {
+            return 'Slide, and jump!';
+        }
+    });
+    ct = Ember.AnimatedContainerView.create({
+        name: 'foo',
+        currentView: view1
+    });
+    Ember.run(function() {
+        ct.appendTo('#qunit-fixture');
+    });
+    var view2 = Ember.View.create({
+        template: function() {
+            return 'Now chase the rat!';
+        }
+    });
+    Ember.run(function() {
+        ct.enqueueAnimation('slideLeft');
+        ct.set('currentView', view2);
+    });
+    setTimeout(function() {
+        var view3 = Ember.View.create({
+            template: function() {
+                return 'Go go sugar Pops!';
+            }
+        });
+        Ember.run(function() {
+            ct.enqueueAnimation('slideLeft');
+            ct.set('currentView', view3);
+        });
+        var view4 = Ember.View.create({
+            template: function() {
+                return 'Stop!';
+            }
+        });
+        Ember.run(function() {
+            ct.enqueueAnimation('slideLeft');
+            ct.set('currentView', view4);
+        });
+        equal(Ember.$.trim(ct.$().text()), 'Slide, and jump!Now chase the rat!', 'Container still has only the two first views\'s texts.');
+        //Sleep 450ms to allow the first animation to finish
+        setTimeout(function() {
+            equal(Ember.$.trim(ct.$().text()), 'Now chase the rat!Stop!', 'Container has view2 and view 4\'s texts.');
+            equal(view1.get('isDestroyed'), true, 'view1 was destroyed');
+            equal(view3.get('isDestroyed'), true, 'view3 view was destroyed (it was never really visible)');
+            setTimeout(function() {
+                equal(Ember.$.trim(ct.$().text()), 'Stop!', 'Container only has view4\'s text.');
+                equal(view2.get('isDestroyed'), true, 'view2 was destroyed');
+                start();
+            }, 1000);
+        }, 450);
+    }, 100)
 });

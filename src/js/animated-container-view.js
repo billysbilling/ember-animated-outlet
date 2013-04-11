@@ -13,6 +13,7 @@ Ember.AnimatedContainerView = Ember.ContainerView.extend({
         this._super();
         //Register this view, so queued effects can be related with this view by name
         Ember.AnimatedContainerView._views[this.get('name')] = this;
+        this._isAnimating = false;
     },
     
     willDestroy: function() {
@@ -33,38 +34,74 @@ Ember.AnimatedContainerView = Ember.ContainerView.extend({
     }, 'currentView'),
 
     _currentViewDidChange: Ember.observer(function() {
-        var self = this,
-            newView = Ember.get(this, 'currentView'),
+        var newView = Ember.get(this, 'currentView'),
             oldView = Ember.get(this, 'oldView'),
-            name = this.get('name');
+            name = this.get('name'),
+            effect = null;
         if (newView) {
-            this.pushObject(newView);
-            //Only animate if there is both a new view and an old view
             if (oldView) {
                 Ember.assert('Ember.AnimatedContainerView can only animate non-virtual views. You need to explicitly define your view class.', !oldView.isVirtual);
                 Ember.assert('Ember.AnimatedContainerView can only animate non-virtual views. You need to explicitly define your view class.', !newView.isVirtual);
                 //Get and validate a potentially queued effect
-                var effect = Ember.AnimatedContainerView._animationQueue[name];
+                effect = Ember.AnimatedContainerView._animationQueue[name];
+                delete Ember.AnimatedContainerView._animationQueue[name];
                 if (effect && !Ember.AnimatedContainerView._effects[effect]) {
                     Ember.warn('Unknown animation effect: '+effect);
                     effect = null;
                 }
-                if (effect) {
-                    //If an effect is queued, then start the effect when the new view has been inserted
-                    delete Ember.AnimatedContainerView._animationQueue[name];
-                    newView.on('didInsertElement', function() {
-                        Ember.AnimatedContainerView._effects[effect](self, newView, oldView);
+                //Forget about the old view
+                this.set('oldView', null);
+            }
+            //If there is already an animation queued, we should cancel it
+            if (this._queuedAnimation) {
+                oldView.destroy(); //the oldView has never been visible, and never will be, so we can just destroy it now
+                oldView = this._queuedAnimation.oldView; //instead, use the oldView from the queued animation, which is our real currentView
+            }
+            //Queue this animation and check the queue
+            this._queuedAnimation = {
+                newView: newView,
+                oldView: oldView,
+                effect: effect
+            };
+            this._handleAnimationQueue();
+        }
+    }, 'currentView'),
+
+    _handleAnimationQueue: function() {
+        //If animation is in progress, just stop here. Once the animation has finished, this method will be called again.
+        if (this._isAnimating) {
+            return;
+        }
+        var self = this,
+            q = this._queuedAnimation;
+        if (q) {
+            var newView = q.newView,
+                oldView = q.oldView,
+                effect = q.effect;
+            this._queuedAnimation = null;
+            //Push the newView to this view, which will append it to the DOM
+            this.pushObject(newView);
+            if (oldView && effect) {
+                //If an effect is queued, then start the effect when the new view has been inserted in the DOM
+                this._isAnimating = true;
+                newView.on('didInsertElement', function() {
+                    Ember.AnimatedContainerView._effects[effect](self, newView, oldView, function() {
+                        self.removeObject(oldView);
+                        oldView.destroy();
+                        //Check to see if there are any queued animations
+                        self._isAnimating = false;
+                        self._handleAnimationQueue();
                     });
-                } else {
+                });
+            } else {
+                if (oldView) {
                     //If there is no effect queued, then just remove the old view (as would normally happen in a ContainerView)
                     this.removeObject(oldView);
                     oldView.destroy();
                 }
-                //Forget about the old view
-                this.set('oldView', null);
             }
         }
-    }, 'currentView'),
+    },
 
     enqueueAnimation: function(effect) {
         Ember.AnimatedContainerView._animationQueue[this.get('name')] = effect;

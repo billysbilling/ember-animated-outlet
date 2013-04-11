@@ -1,4 +1,4 @@
-Ember.AnimatedContainerView.registerEffect('fade', function(ct, newView, oldView) {
+Ember.AnimatedContainerView.registerEffect('fade', function(ct, newView, oldView, callback) {
     var newEl = newView.$(),
         oldEl = oldView.$();
     newEl.addClass('ember-animated-container-fade-new');
@@ -7,8 +7,7 @@ Ember.AnimatedContainerView.registerEffect('fade', function(ct, newView, oldView
         oldEl.addClass('ember-animated-container-fade-old-fading');
         setTimeout(function() {
             newEl.removeClass('ember-animated-container-fade-new');
-            ct.removeObject(oldView);
-            oldView.destroy();
+            callback();
         }, 550);
     }, 0);
 });
