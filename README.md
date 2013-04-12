@@ -110,8 +110,10 @@ You can use the following effects:
 | ----------- | ----------- | 
 | `fade` | The old view will be faded out, revealing the new view underneath it. Uses CSS transitions. |
 | `flip` | Using CSS3 to perform a 3D flip. |
-| `slideLeft` | A slide animation where the views slide towards the left side of the screen. Uses CSS transitions. |
-| `slideRight` | A slide animation where the views slide towards the right side of the screen. Uses CSS transitions. |
+| `slideUp` | A slide animation where the views slide towards the top side of the screen. Uses CSS transitions. |
+| `slideRight` | A slide animation where both views slide towards the right side of the screen. Uses CSS transitions. |
+| `slideDown` | A slide animation where both views slide towards the bottom side of the screen. Uses CSS transitions. |
+| `slideLeft` | A slide animation where both views slide towards the left side of the screen. Uses CSS transitions. |
 
 Is your favorite effect missing? Fork the repo, send a pull request, and make other folks happy, too :-)
 
@@ -175,7 +177,12 @@ The test suite uses [QUnit](http://qunitjs.com/).
 
 ## Todo
 
+- Use a higher perspective for flip (1500px)
+- Include the view's name in "Ember.AnimatedContainerView can only animate non-virtual views. You need to explicitly define your view class"
+- Eliminate the need to concrete views
 - "Freeze" the exiting view, so its content won't be changed by e.g. a controller change.
+- Tap into the browser back button logic in ember to make it use animations too.
+- Option to ignore all animations to allow users who don't like it to disable it.
 - Tests
     - Is there a better way than to use `setTimeout` to wait for animations to finish?
 - Write missing jsdoc for some classes 
