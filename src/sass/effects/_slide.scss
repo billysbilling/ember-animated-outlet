@@ -1,4 +1,7 @@
-.ember-animated-container-slide-left-ct, .ember-animated-container-slide-right-ct {
+.ember-animated-container-slide-left-ct,
+.ember-animated-container-slide-right-ct,
+.ember-animated-container-slide-up-ct,
+.ember-animated-container-slide-down-ct {
     @include transition-property(transform);
     @include transition-duration(0.4s);
     @include transition-timing-function(ease-out);
@@ -17,10 +20,26 @@
     @include transform(translateX(100%));
 }
 
+.ember-animated-container-slide-up-ct-sliding {
+    @include transform(translateY(-100%));
+}
+
+.ember-animated-container-slide-down-ct-sliding {
+    @include transform(translateY(100%));
+}
+
 .ember-animated-container-slide-left-new {
     left: 100% !important;
 }
 
 .ember-animated-container-slide-right-new {
     left: -100% !important;
+}
+
+.ember-animated-container-slide-up-new {
+    top: 100% !important;
+}
+
+.ember-animated-container-slide-down-new {
+    top: -100% !important;
 }

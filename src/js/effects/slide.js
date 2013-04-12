@@ -31,12 +31,28 @@ Ember.AnimatedContainerView.registerEffect('slideRight', function(ct, newView, o
     slide(ct, newView, oldView, callback, 'right', false);
 });
 
+Ember.AnimatedContainerView.registerEffect('slideUp', function(ct, newView, oldView, callback) {
+    slide(ct, newView, oldView, callback, 'up', false);
+});
+
+Ember.AnimatedContainerView.registerEffect('slideDown', function(ct, newView, oldView, callback) {
+    slide(ct, newView, oldView, callback, 'down', false);
+});
+
 Ember.AnimatedContainerView.registerEffect('slowSlideLeft', function(ct, newView, oldView, callback) {
     slide(ct, newView, oldView, callback, 'left', true);
 });
     
 Ember.AnimatedContainerView.registerEffect('slowSlideRight', function(ct, newView, oldView, callback) {
     slide(ct, newView, oldView, callback, 'right', true);
+});
+
+Ember.AnimatedContainerView.registerEffect('slowSlideUp', function(ct, newView, oldView, callback) {
+    slide(ct, newView, oldView, callback, 'up', false);
+});
+
+Ember.AnimatedContainerView.registerEffect('slowSlideDown', function(ct, newView, oldView, callback) {
+    slide(ct, newView, oldView, callback, 'down', false);
 });
 
 })();
