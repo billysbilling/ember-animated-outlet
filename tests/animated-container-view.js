@@ -110,7 +110,9 @@ var effects = [
     'fade',
     'flip',
     'slideLeft',
-    'slideRight'
+    'slideRight',
+    'slideUp',
+    'slideDown'
 ];
 effects.forEach(function(effect) {
     asyncTest(effect + ' effect', function() {
