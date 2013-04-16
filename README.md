@@ -177,7 +177,6 @@ The test suite uses [QUnit](http://qunitjs.com/).
 
 ## Todo
 
-- Use a higher perspective for flip (1500px)
 - Include the view's name in "Ember.AnimatedContainerView can only animate non-virtual views. You need to explicitly define your view class"
 - Eliminate the need to concrete views
 - "Freeze" the exiting view, so its content won't be changed by e.g. a controller change.
