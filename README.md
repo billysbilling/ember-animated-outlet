@@ -134,6 +134,10 @@ You can use the following effects:
 | `slideRight` | A slide animation where both views slide towards the right side of the screen. Uses CSS transitions. |
 | `slideDown` | A slide animation where both views slide towards the bottom side of the screen. Uses CSS transitions. |
 | `slideLeft` | A slide animation where both views slide towards the left side of the screen. Uses CSS transitions. |
+| `slideOverUp` | Same as slideUp, but original view remains in place. Uses CSS transitions. |
+| `slideOverRight` | Same as slideRight, but original view remains in place. Uses CSS transitions. |
+| `slideOverDown` | Same as slideDown, but original view remains in place. Uses CSS transitions. |
+| `slideOverLeft` | Same as slideLeft, but original view remains in place. Uses CSS transitions. |
 
 Is your favorite effect missing? Fork the repo, send a pull request, and make other folks happy, too :-)
 
