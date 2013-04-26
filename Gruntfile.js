@@ -12,6 +12,7 @@ module.exports = function(grunt) {
                 src: [
                     'src/js/animated-container-view.js',
                     'src/js/animated-outlet-helper.js',
+                    'src/js/animated-linkto-helper.js',
                     'src/js/route.js',
                     'src/js/controller-mixin.js',
                     'src/js/effects/*.js'

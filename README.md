@@ -32,7 +32,7 @@ in the `<head>`.
 </head>
 <body>
     <!-- Add your Handlebars templates here  -->
-    
+
     <script src="/vendor/jquery-1.9.0.js"></script>
     <script src="/vendor/handlebars-1.0.rc.3.js"></script>
     <script src="/vendor/ember.js"></script>
@@ -69,6 +69,26 @@ App.ApplicationRoute = Ember.Route.extend({
 });
 ```
 
+### Use `linkToAnimated` instead of `linkTo`
+
+When you want to use the animations from your Handlebars templates, you can use `linkToAnimated`. The syntax  for `linkToAnimated`is:
+
+```handlebars
+{{#linkToAnimated invoices.show animations="main:slideLeft" invoice}}
+```
+
+Where:
+- `invoices.show` is the route
+- `invoice` is the model
+- `main:slideLeft` is the animation
+
+When you are not using a model, the syntax is:
+
+```handlebars
+{{#linkToAnimated index animations="main:fade"}}Introduction{{/linkToAnimated}}
+```
+
+
 There are `*Animated` versions of all the different ways you can transition between routes:
 
 | Class | Normal method | Animated method |
@@ -79,7 +99,7 @@ There are `*Animated` versions of all the different ways you can transition betw
 | `Ember.Controller` | `replaceRoute(name, model)` | `replaceRouteAnimated(name, animations, model)` |
 
 You can also programmatically enqueue an animation for an outlet. A good example is when manually manipulating the `history`.
- 
+
 ```javascript
 App.ApplicationRoute = Ember.Route.extend({
     goBack: function(invoice) {
@@ -107,7 +127,7 @@ That's all it takes!
 You can use the following effects:
 
 | Effect name | Description |
-| ----------- | ----------- | 
+| ----------- | ----------- |
 | `fade` | The old view will be faded out, revealing the new view underneath it. Uses CSS transitions. |
 | `flip` | Using CSS3 to perform a 3D flip. |
 | `slideUp` | A slide animation where the views slide towards the top side of the screen. Uses CSS transitions. |
@@ -138,7 +158,7 @@ If you experience issues in any browser, please [file an issue](https://github.c
 - The `{{animatedOutlet}}` helper should be contained in an element that has `position: relative`. The outlet element is
   automatically absolutely positioned (set to top:0 and left:0) and will automatically size itself to be 100% width and
   100% height of the parent.
-- The animations use CSS transitions. There is no fallback for older browsers (yet).  
+- The animations use CSS transitions. There is no fallback for older browsers (yet).
 - Pressing the browser's back button will not perform any animation, unless you tap into the Ember code that handles
   the `popstate`/`hashchange` event.
 
@@ -156,7 +176,7 @@ Run `npm install` from the project directory to install dependencies.
 
 ### Building
 
-You can build the project simply by running `grunt` in your terminal. If you want to let Grunt watch your files, so it 
+You can build the project simply by running `grunt` in your terminal. If you want to let Grunt watch your files, so it
 automatically builds every time you change something, you can run `grunt watch`.
 
 The build process will place the files `ember-animated-outlet.js`, `ember-animated-outlet.min.js` and
@@ -184,5 +204,5 @@ The test suite uses [QUnit](http://qunitjs.com/).
 - Option to ignore all animations to allow users who don't like it to disable it.
 - Tests
     - Is there a better way than to use `setTimeout` to wait for animations to finish?
-- Write missing jsdoc for some classes 
+- Write missing jsdoc for some classes
 - Documentation of using Ember.AnimatedContainerView programmatically
