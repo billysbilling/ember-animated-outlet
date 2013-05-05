@@ -112,7 +112,11 @@ var effects = [
     'slideLeft',
     'slideRight',
     'slideUp',
-    'slideDown'
+    'slideDown',
+    'slideOverLeft',
+    'slideOverRight',
+    'slideOverUp',
+    'slideOverDown'
 ];
 effects.forEach(function(effect) {
     asyncTest(effect + ' effect', function() {
