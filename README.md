@@ -17,10 +17,10 @@ It's very easy to use Ember Animated Outlet and get full-fledged animation trans
 
 ### Include Javascript and CSS files in your HTML page
 
-Download the latest version of [ember-animated-outlet.js](http://ember-animated-outlet-demo.herokuapp.com/js/vendor/ember-animated-outlet.js)
+Download the latest version of [ember-animated-outlet.js](https://raw.github.com/billysbilling/ember-animated-outlet-demo/master/public/js/vendor/ember-animated-outlet.js)
 (or build it yourself), and include it in your HTML page _after_ the `ember.js` file.
 
-You also need to download and include the latest version of [ember-animated-outlet.css](http://ember-animated-outlet-demo.herokuapp.com/js/vendor/ember-animated-outlet.css)
+You also need to download and include the latest version of [ember-animated-outlet.css](https://raw.github.com/billysbilling/ember-animated-outlet-demo/master/public/js/vendor/ember-animated-outlet.css)
 in the `<head>`.
 
 ```html
