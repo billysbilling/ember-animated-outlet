@@ -6,7 +6,7 @@
     width: 100%;
     @include transform(translate3d(0, 0, 0));
 
-    & > div {
+    & > .ember-view {
         position: absolute;
         top: 0;
         left: 0;
