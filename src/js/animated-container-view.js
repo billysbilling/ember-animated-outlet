@@ -86,11 +86,13 @@ Ember.AnimatedContainerView = Ember.ContainerView.extend({
                 this._isAnimating = true;
                 newView.on('didInsertElement', function() {
                     Ember.AnimatedContainerView._effects[effect](self, newView, oldView, function() {
-                        self.removeObject(oldView);
-                        oldView.destroy();
-                        //Check to see if there are any queued animations
-                        self._isAnimating = false;
-                        self._handleAnimationQueue();
+                        Em.run(function() {
+                            self.removeObject(oldView);
+                            oldView.destroy();
+                            //Check to see if there are any queued animations
+                            self._isAnimating = false;
+                            self._handleAnimationQueue();
+                        });
                     });
                 });
             } else {
