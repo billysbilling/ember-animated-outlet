@@ -25,18 +25,11 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
   }
 
   function args(linkView, router, route) {
-    var passedRouteName = route || linkView.namedRoute, routeName;
-
-    routeName = fullRouteName(router, passedRouteName);
-    Ember.assert("The route " + passedRouteName + " was not found", router.hasRoute(routeName));
-
-    var ret = [ routeName ];
-
-    animations = linkView.parameters.animations;
-
-    return ret.concat(animations, resolvedPaths(linkView.parameters));
+    var ret = get(linkView,'routeArgs').slice(),
+        animations = linkView.parameters.animations;
+    ret.splice(1,0,animations);
+    return ret;
   }
-
 
   /**
     Renders a link to the supplied route using animation.
@@ -46,19 +39,26 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
     @extends Ember.LinkView
   **/
   var AnimatedLinkView = Ember.AnimatedLinkView = Ember.LinkView.extend({
-    click: function(event) {
+    _invoke: function(event) {
       if (!isSimpleClick(event)) { return true; }
 
       event.preventDefault();
       if (this.bubbles === false) { event.stopPropagation(); }
 
-      var router = this.get('router');
-      var route = this.get('container').lookup('route:' + this.get('namedRoute'));
+      if (get(this, '_isDisabled')) { return false; }
 
-      if (this.get('replace')) {
-        route.replaceWithAnimated.apply(router, args(this, router));
+      if (get(this, 'loading')) {
+        Ember.Logger.warn("This link-to is in an inactive loading state because at least one of its parameters presently has a null/undefined value, or the provided route name is invalid.");
+        return false;
+      }
+
+      var router = this.get('router'),
+          routeArgs = args(this, router);
+
+      if (get(this, ('replace'))) {
+        router.replaceWithAnimated.apply(router, routeArgs);
       } else {
-        route.transitionToAnimated.apply(router, args(this, router));
+        router.transitionToAnimated.apply(router, routeArgs);
       }
     }
   });
@@ -73,9 +73,9 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
     @return {String} HTML string
   */
   Ember.Handlebars.registerHelper('linkToAnimated', function(name) {
-    var options = [].slice.call(arguments, -1)[0];
-    var params = [].slice.call(arguments, 1, -1);
-    var hash = options.hash;
+    var options = [].slice.call(arguments, -1)[0],
+        params = [].slice.call(arguments, 0, -1),
+        hash = options.hash;
 
     Ember.assert("linkToAnimated must contain animations", typeof(hash.animations) == 'string')
     var re = /\s*([a-z]+)\s*:\s*([a-z]+)/gi;
@@ -86,6 +86,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
     delete(hash.animations)
     hash.namedRoute = name;
     hash.currentWhen = hash.currentWhen || name;
+    hash.disabledBinding = hash.disabledWhen;
 
     hash.parameters = {
       context: this,
