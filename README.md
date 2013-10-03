@@ -165,6 +165,7 @@ If you experience issues in any browser, please [file an issue](https://github.c
 - The animations use CSS transitions. There is no fallback for older browsers (yet).
 - Pressing the browser's back button will not perform any animation, unless you tap into the Ember code that handles
   the `popstate`/`hashchange` event.
+- Animations are not executed when transitioning to the same route with a different model. This is due to the way Ember reuses the same DOM element, and will likely not be fixed until animation support lands in Ember core in 1.1.
 
 
 ## Building and testing
