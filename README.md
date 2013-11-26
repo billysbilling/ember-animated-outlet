@@ -74,7 +74,7 @@ App.ApplicationRoute = Ember.Route.extend({
 When you want to use the animations from your Handlebars templates, you can use `linkToAnimated`. The syntax  for `linkToAnimated`is:
 
 ```handlebars
-{{#linkToAnimated invoices.show animations="main:slideLeft" invoice}}
+{{#linkToAnimated "invoices.show" animations="main:slideLeft" invoice}}
 ```
 
 Where:
@@ -85,7 +85,7 @@ Where:
 When you are not using a model, the syntax is:
 
 ```handlebars
-{{#linkToAnimated index animations="main:fade"}}Introduction{{/linkToAnimated}}
+{{#linkToAnimated "index" animations="main:fade"}}Introduction{{/linkToAnimated}}
 ```
 
 
