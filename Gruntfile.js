@@ -50,57 +50,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     
-    grunt.registerTask('demo', 'Copy to demo', function() {
-        var done = this.async();
-        grunt.log.writeln('Checking if demo submodule has been initialized...');
-        fs.exists('demo/index.html', function(exists) {
-            if (!exists) {
-                grunt.log.writeln('Skipping copy to demo...');
-                return done();
-            }
-            grunt.log.writeln('Copying to demo...');
-            var a = 0;
-            copyFile('dist/ember-animated-outlet.js', 'demo/public/js/vendor/ember-animated-outlet.js', function(err) {
-                if (err) throw err;
-                a++;
-                if (a == 2) {
-                    done();
-                }
-            });
-            copyFile('dist/ember-animated-outlet.css', 'demo/public/js/vendor/ember-animated-outlet.css', function(err) {
-                if (err) throw err;
-                a++;
-                if (a == 2) {
-                    done();
-                }
-            });
-        });
-    });
-    
-    grunt.registerTask('default', ['concat', 'uglify', 'compass', 'demo']);
+    grunt.registerTask('default', ['concat', 'uglify', 'compass']);
 
 };
-
-function copyFile(source, target, callback) {
-    var cbCalled = false;
-
-    var rd = fs.createReadStream(source);
-    rd.on("error", function(err) {
-        done(err);
-    });
-    var wr = fs.createWriteStream(target);
-    wr.on("error", function(err) {
-        done(err);
-    });
-    wr.on("close", function(ex) {
-        done();
-    });
-    rd.pipe(wr);
-
-    function done(err) {
-        if (!cbCalled) {
-            callback(err);
-            cbCalled = true;
-        }
-    }
-}
