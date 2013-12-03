@@ -5,6 +5,8 @@ Ember Animated Outlet is a plug'n'play module to support animated route transiti
 The module is maintained by [Billy's Billing online accounting software](http://billysbilling.com/). We use it ourselves
 in our upcoming HTML5 mobile app.
 
+Works with Ember.js 1.0.0. Has also been tested with Ember.js 1.3.0-beta (as of https://github.com/emberjs/ember.js/commit/0fcc6f8d236152439c68034d87ff74d133cf8b50).
+
 
 ## Demo
 
@@ -17,10 +19,10 @@ It's very easy to use Ember Animated Outlet and get full-fledged animation trans
 
 ### Include Javascript and CSS files in your HTML page
 
-Download the latest version of [ember-animated-outlet.js](https://raw.github.com/billysbilling/ember-animated-outlet-demo/master/public/js/vendor/ember-animated-outlet.js)
+Download the latest version of [ember-animated-outlet.js](https://raw.github.com/billysbilling/ember-animated-outlet/master/dist/ember-animated-outlet.js)
 (or build it yourself), and include it in your HTML page _after_ the `ember.js` file.
 
-You also need to download and include the latest version of [ember-animated-outlet.css](https://raw.github.com/billysbilling/ember-animated-outlet-demo/master/public/js/vendor/ember-animated-outlet.css)
+You also need to download and include the latest version of [ember-animated-outlet.css](https://raw.github.com/billysbilling/ember-animated-outlet/master/dist/ember-animated-outlet.css)
 in the `<head>`.
 
 ```html
@@ -33,8 +35,8 @@ in the `<head>`.
 <body>
     <!-- Add your Handlebars templates here  -->
 
-    <script src="/vendor/jquery-1.9.0.js"></script>
-    <script src="/vendor/handlebars-1.0.rc.3.js"></script>
+    <script src="/vendor/jquery.js"></script>
+    <script src="/vendor/handlebars.js"></script>
     <script src="/vendor/ember.js"></script>
     <script src="/vendor/ember-animated-outlet.js"></script>
     <!-- Add your own JavaScript files here  -->
@@ -43,38 +45,23 @@ in the `<head>`.
 ```
 
 
-### Use `{{animatedOutlet}}` instead of `{{outlet}}`
+### Use `{{animated-outlet}}` instead of `{{outlet}}`
 
-In those outlets where you would like to use animation, use the `{{animatedOutlet}}` helper instead of `{{outlet}}`, which
+In those outlets where you would like to use animation, use the `{{animated-outlet}}` helper instead of `{{outlet}}`, which
 you would normally use. You need to give the outlet a name. Example:
 
 ```handlebars
 <h1>Ember Animated Outlet Example</h1>
-{{animatedOutlet name="main"}}
+{{animated-outlet name="main"}}
 ```
 
-### Use `transitionToAnimated` instead of `transitionTo`
 
-In your JavaScript code where you would normally write `transitionTo` in your routes to transition to another route, you
-should use `transitionToAnimated` instead. `transitionToAnimated` takes an extra argument, `animations`, which should be the second
-argument right after the name of the route to transition to.
+### Use `link-to-animated` instead of `link-to`
 
-`animations` should be a hash with outlet names (the one you set in `{{animatedOutlet}}`) as keys and effect names as values.
-
-```javascript
-App.ApplicationRoute = Ember.Route.extend({
-    showInvoice: function(invoice) {
-        this.transitionToAnimated('invoices.show', {main: 'slideLeft'}, invoice);
-    }
-});
-```
-
-### Use `linkToAnimated` instead of `linkTo`
-
-When you want to use the animations from your Handlebars templates, you can use `linkToAnimated`. The syntax  for `linkToAnimated`is:
+When you want to use the animations from your Handlebars templates, you can use `link-to-animated`. The syntax  for `link-to-animated`is:
 
 ```handlebars
-{{#linkToAnimated "invoices.show" animations="main:slideLeft" invoice}}
+{{#link-to-animated "invoices.show" animations="main:slideLeft" invoice}}
 ```
 
 Where:
@@ -85,7 +72,24 @@ Where:
 When you are not using a model, the syntax is:
 
 ```handlebars
-{{#linkToAnimated "index" animations="main:fade"}}Introduction{{/linkToAnimated}}
+{{#link-to-animated "index" animations="main:fade"}}Introduction{{/link-to-animated}}
+```
+
+
+### Use `transitionToAnimated` instead of `transitionTo`
+
+In your JavaScript code where you would normally write `transitionTo` in your routes to transition to another route, you
+should use `transitionToAnimated` instead. `transitionToAnimated` takes an extra argument, `animations`, which should be the second
+argument right after the name of the route to transition to.
+
+`animations` should be a hash with outlet names (the one you set in `{{animated-outlet}}`) as keys and effect names as values.
+
+```javascript
+App.ApplicationRoute = Ember.Route.extend({
+    showInvoice: function(invoice) {
+        this.transitionToAnimated('invoices.show', {main: 'slideLeft'}, invoice);
+    }
+});
 ```
 
 
@@ -109,7 +113,7 @@ App.ApplicationRoute = Ember.Route.extend({
 });
 ```
 
-You can have as many `{{animatedOutlet}}`s as you would like. In most cases a route transition will only include one animation.
+You can have as many `{{animated-outlet}}`s as you would like. In most cases a route transition will only include one animation.
 But since the `animations` argument is a hash, you can enqueue multiple animations:
 
 ```javascript
@@ -159,7 +163,7 @@ If you experience issues in any browser, please [file an issue](https://github.c
 - All child views of an `App.AnimatedContainerView` need to be explicitly defined, since the animations only work with non-virtual views.
   This means that if you have a route called `invoices.show` and you expect to animate into it, you need to define the view for it:
   `App.InvoicesShowView = Ember.View.extend()`
-- The `{{animatedOutlet}}` helper should be contained in an element that has `position: relative`. The outlet element is
+- The `{{animated-outlet}}` helper should be contained in an element that has `position: relative`. The outlet element is
   automatically absolutely positioned (set to top:0 and left:0) and will automatically size itself to be 100% width and
   100% height of the parent.
 - The animations use CSS transitions. There is no fallback for older browsers (yet).
