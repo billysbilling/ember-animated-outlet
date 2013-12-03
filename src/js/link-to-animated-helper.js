@@ -72,12 +72,12 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
     @param {Object} [context]*
     @return {String} HTML string
   */
-  Ember.Handlebars.registerHelper('linkToAnimated', function(name) {
+  Ember.Handlebars.registerHelper('link-to-animated', function(name) {
     var options = [].slice.call(arguments, -1)[0],
         params = [].slice.call(arguments, 0, -1),
         hash = options.hash;
 
-    Ember.assert("linkToAnimated must contain animations", typeof(hash.animations) == 'string')
+    Ember.assert("link-to-animated must contain animations", typeof(hash.animations) == 'string')
     var re = /\s*([a-z]+)\s*:\s*([a-z]+)/gi;
     var animations = {};
     while (match = re.exec(hash.animations)) {
@@ -96,6 +96,21 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
     };
 
     return Ember.Handlebars.helpers.view.call(this, AnimatedLinkView, options);
+  });
+  
+  /**
+    See link-to-animated
+
+    @method linkTo
+    @for Ember.Handlebars.helpers
+    @deprecated
+    @param {String} routeName
+    @param {Object} [context]*
+    @return {String} HTML string
+  */
+  Ember.Handlebars.registerHelper('linkToAnimated', function() {
+    Ember.warn("The 'linkToAnimated' view helper is deprecated in favor of 'link-to-animated'");
+    return Ember.Handlebars.helpers['link-to-animated'].apply(this, arguments);
   });
 
 });

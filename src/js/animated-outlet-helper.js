@@ -7,7 +7,7 @@
   @for Ember.Handlebars.helpers
   @param {String} property the property on the controller that holds the view for this outlet
 */
-Handlebars.registerHelper('animatedOutlet', function(property, options) {
+Handlebars.registerHelper('animated-outlet', function(property, options) {
     var outletSource;
 
     if (property && property.data && property.data.isRenderData) {
@@ -25,4 +25,12 @@ Handlebars.registerHelper('animatedOutlet', function(property, options) {
 
     //Only this line has been changed
     return Ember.Handlebars.helpers.view.call(this, Ember.AnimatedContainerView, options);
+});
+
+/**
+  See animated-outlet
+*/
+Handlebars.registerHelper('animatedOutlet', function(property, options) {
+    Ember.warn("The 'animatedOutlet' view helper is deprecated in favor of 'animated-outlet'");
+    return Ember.Handlebars.helpers['animated-outlet'].apply(this, arguments);
 });
