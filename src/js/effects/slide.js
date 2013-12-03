@@ -18,7 +18,9 @@ var slide = function(ct, newView, oldView, callback, direction, slow) {
             }
             ctEl.removeClass('ember-animated-container-slide-'+direction+'-ct-sliding');
             newEl.removeClass('ember-animated-container-slide-'+direction+'-new');
-            callback();
+            setTimeout(function() {
+                callback();
+            }, 0);
         }, duration);
     }, 0);
 };
