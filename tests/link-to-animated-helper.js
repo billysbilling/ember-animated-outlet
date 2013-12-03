@@ -37,8 +37,8 @@ module("The {{linkToAnimated}} helper", {
       Router = App.Router;
 
       Ember.TEMPLATES.app = Ember.Handlebars.compile("{{outlet}}");
-      Ember.TEMPLATES.index = Ember.Handlebars.compile("<h3>Home</h3>{{#linkToAnimated 'about' id='about-link' animations='main:fade'}}About{{/linkToAnimated}}{{#linkToAnimated index id='self-link' animations='main:fade'}}Self{{/linkToAnimated}}");
-      Ember.TEMPLATES.about = Ember.Handlebars.compile("<h3>About</h3>{{#linkToAnimated 'index' id='home-link' animations='main:fade'}}Home{{/linkToAnimated}}{{#linkToAnimated about id='self-link' animations='main:fade'}}Self{{/linkToAnimated}}");
+      Ember.TEMPLATES.index = Ember.Handlebars.compile("<h3>Home</h3>{{#linkToAnimated 'about' id='about-link' animations='main:fade'}}About{{/linkToAnimated}}{{#linkToAnimated 'index' id='self-link' animations='main:fade'}}Self{{/linkToAnimated}}");
+      Ember.TEMPLATES.about = Ember.Handlebars.compile("<h3>About</h3>{{#linkToAnimated 'index' id='home-link' animations='main:fade'}}Home{{/linkToAnimated}}{{#linkToAnimated 'about' id='self-link' animations='main:fade'}}Self{{/linkToAnimated}}");
       Ember.TEMPLATES.item = Ember.Handlebars.compile("<h3>Item</h3><p>{{name}}</p>{{#linkToAnimated 'index' id='home-link' animations='main:fade'}}Home{{/linkToAnimated}}");
 
       AppView = Ember.View.extend({
@@ -69,7 +69,7 @@ test("moves into the named route", function() {
   });
 
   equal(Ember.$('h3:contains(Home)', '#qunit-fixture').length, 1, "The home template was rendered");
-  equal(Ember.$('#self-link.loading', '#qunit-fixture').length, 1, "The self-link was rendered with active class");
+  equal(Ember.$('#self-link.active', '#qunit-fixture').length, 1, "The self-link was rendered with active class");
   equal(Ember.$('#about-link:not(.active)', '#qunit-fixture').length, 1, "The other link was rendered without active class");
 
   Ember.run(function() {
@@ -77,7 +77,7 @@ test("moves into the named route", function() {
   });
 
   equal(Ember.$('h3:contains(About)', '#qunit-fixture').length, 1, "The about template was rendered");
-  equal(Ember.$('#self-link.loading', '#qunit-fixture').length, 1, "The self-link was rendered with active class");
+  equal(Ember.$('#self-link.active', '#qunit-fixture').length, 1, "The self-link was rendered with active class");
   equal(Ember.$('#home-link:not(.active)', '#qunit-fixture').length, 1, "The other link was rendered without active class");
 });
 
