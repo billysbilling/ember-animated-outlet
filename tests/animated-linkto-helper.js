@@ -37,9 +37,9 @@ module("The {{linkToAnimated}} helper", {
       Router = App.Router;
 
       Ember.TEMPLATES.app = Ember.Handlebars.compile("{{outlet}}");
-      Ember.TEMPLATES.index = Ember.Handlebars.compile("<h3>Home</h3>{{#linkToAnimated about id='about-link' animations='main:fade'}}About{{/linkToAnimated}}{{#linkToAnimated index id='self-link' animations='main:fade'}}Self{{/linkToAnimated}}");
-      Ember.TEMPLATES.about = Ember.Handlebars.compile("<h3>About</h3>{{#linkToAnimated index id='home-link' animations='main:fade'}}Home{{/linkToAnimated}}{{#linkToAnimated about id='self-link' animations='main:fade'}}Self{{/linkToAnimated}}");
-      Ember.TEMPLATES.item = Ember.Handlebars.compile("<h3>Item</h3><p>{{name}}</p>{{#linkToAnimated index id='home-link' animations='main:fade'}}Home{{/linkToAnimated}}");
+      Ember.TEMPLATES.index = Ember.Handlebars.compile("<h3>Home</h3>{{#linkToAnimated 'about' id='about-link' animations='main:fade'}}About{{/linkToAnimated}}{{#linkToAnimated index id='self-link' animations='main:fade'}}Self{{/linkToAnimated}}");
+      Ember.TEMPLATES.about = Ember.Handlebars.compile("<h3>About</h3>{{#linkToAnimated 'index' id='home-link' animations='main:fade'}}Home{{/linkToAnimated}}{{#linkToAnimated about id='self-link' animations='main:fade'}}Self{{/linkToAnimated}}");
+      Ember.TEMPLATES.item = Ember.Handlebars.compile("<h3>Item</h3><p>{{name}}</p>{{#linkToAnimated 'index' id='home-link' animations='main:fade'}}Home{{/linkToAnimated}}");
 
       AppView = Ember.View.extend({
         templateName: 'app'
@@ -69,7 +69,7 @@ test("moves into the named route", function() {
   });
 
   equal(Ember.$('h3:contains(Home)', '#qunit-fixture').length, 1, "The home template was rendered");
-  equal(Ember.$('#self-link.active', '#qunit-fixture').length, 1, "The self-link was rendered with active class");
+  equal(Ember.$('#self-link.loading', '#qunit-fixture').length, 1, "The self-link was rendered with active class");
   equal(Ember.$('#about-link:not(.active)', '#qunit-fixture').length, 1, "The other link was rendered without active class");
 
   Ember.run(function() {
@@ -77,7 +77,7 @@ test("moves into the named route", function() {
   });
 
   equal(Ember.$('h3:contains(About)', '#qunit-fixture').length, 1, "The about template was rendered");
-  equal(Ember.$('#self-link.active', '#qunit-fixture').length, 1, "The self-link was rendered with active class");
+  equal(Ember.$('#self-link.loading', '#qunit-fixture').length, 1, "The self-link was rendered with active class");
   equal(Ember.$('#home-link:not(.active)', '#qunit-fixture').length, 1, "The other link was rendered without active class");
 });
 
@@ -85,7 +85,7 @@ test("supports URL replacement", function() {
   var setCount = 0,
       replaceCount = 0;
 
-  Ember.TEMPLATES.index = Ember.Handlebars.compile("<h3>Home</h3>{{#linkToAnimated about id='about-link' animations='main:fade' replace=true}}About{{/linkToAnimated}}");
+  Ember.TEMPLATES.index = Ember.Handlebars.compile("<h3>Home</h3>{{#linkToAnimated 'about' id='about-link' animations='main:fade' replace=true}}About{{/linkToAnimated}}");
 
   Router.reopen({
     location: Ember.NoneLocation.createWithMixins({
@@ -123,20 +123,20 @@ test("supports URL replacement", function() {
 });
 
 test("asserts when no animations given", function() {
-  Ember.TEMPLATES.index = Ember.Handlebars.compile("<h3>Home</h3>{{#linkToAnimated about}}About{{/linkToAnimated}}{{#linkToAnimated index id='self-link' animations='main:fade' activeClass='zomg-active'}}Self{{/linkToAnimated}}");
+  Ember.TEMPLATES.index = Ember.Handlebars.compile("<h3>Home</h3>{{#linkToAnimated 'about'}}About{{/linkToAnimated}}{{#linkToAnimated 'index' id='self-link' animations='main:fade' activeClass='zomg-active'}}Self{{/linkToAnimated}}");
 
   Router.map(function() {
     this.route("about");
   });
 
-  throws(function() {
+  expectAssertion(function() {
     bootApplication();
   }, /must contain animations/, "linkToAnimated must contain animations");
 });
 
 
 test("passes when empty animations given", function() {
-  Ember.TEMPLATES.index = Ember.Handlebars.compile("<h3>Home</h3>{{#linkToAnimated about animations=''}}About{{/linkToAnimated}}{{#linkToAnimated index id='self-link' animations='main:fade' activeClass='zomg-active'}}Self{{/linkToAnimated}}");
+  Ember.TEMPLATES.index = Ember.Handlebars.compile("<h3>Home</h3>{{#linkToAnimated 'about' animations=''}}About{{/linkToAnimated}}{{#linkToAnimated 'index' id='self-link' animations='main:fade' activeClass='zomg-active'}}Self{{/linkToAnimated}}");
 
   Router.map(function() {
     this.route("about");
@@ -148,7 +148,7 @@ test("passes when empty animations given", function() {
 
 
 test("supports a custom activeClass", function() {
-  Ember.TEMPLATES.index = Ember.Handlebars.compile("<h3>Home</h3>{{#linkToAnimated about id='about-link' animations='main:fade'}}About{{/linkToAnimated}}{{#linkToAnimated index id='self-link' animations='main:fade' activeClass='zomg-active'}}Self{{/linkToAnimated}}");
+  Ember.TEMPLATES.index = Ember.Handlebars.compile("<h3>Home</h3>{{#linkToAnimated 'about' id='about-link' animations='main:fade'}}About{{/linkToAnimated}}{{#linkToAnimated 'index' id='self-link' animations='main:fade' activeClass='zomg-active'}}Self{{/linkToAnimated}}");
 
   Router.map(function() {
     this.route("about");
@@ -195,7 +195,7 @@ test("supports custom, nested, currentWhen", function() {
   });
 
   Ember.TEMPLATES.index = Ember.Handlebars.compile("<h3>Home</h3>{{outlet}}");
-  Ember.TEMPLATES['index/about'] = Ember.Handlebars.compile("{{#linkToAnimated item id='other-link' animations='main:fade' currentWhen='index'}}ITEM{{/linkToAnimated}}");
+  Ember.TEMPLATES['index/about'] = Ember.Handlebars.compile("{{#linkToAnimated 'item' id='other-link' animations='main:fade' currentWhen='index'}}ITEM{{/linkToAnimated}}");
 
   bootApplication();
 
@@ -219,7 +219,7 @@ test("defaults to bubbling", function() {
   var hidden = 0;
 
   App.AboutRoute = Ember.Route.extend({
-    events: {
+    actions: {
       hide: function() {
         hidden++;
       }
@@ -254,7 +254,7 @@ test("supports bubbles=false", function() {
   var hidden = 0;
 
   App.AboutRoute = Ember.Route.extend({
-    events: {
+    actions: {
       hide: function() {
         hidden++;
       }
@@ -282,7 +282,7 @@ test("moves into the named route with context", function() {
     this.resource("item", { path: "/item/:id" });
   });
 
-  Ember.TEMPLATES.about = Ember.Handlebars.compile("<h3>List</h3><ul>{{#each controller}}<li>{{#linkToAnimated item this animations='main:fade'}}{{name}}{{/linkToAnimated}}<li>{{/each}}</ul>{{#linkToAnimated index animations='main:fade' id='home-link'}}Home{{/linkToAnimated}}");
+  Ember.TEMPLATES.about = Ember.Handlebars.compile("<h3>List</h3><ul>{{#each controller}}<li>{{#linkToAnimated 'item' this animations='main:fade'}}{{name}}{{/linkToAnimated}}<li>{{/each}}</ul>{{#linkToAnimated 'index' animations='main:fade' id='home-link'}}Home{{/linkToAnimated}}");
 
   var people = {
     yehuda: "Yehuda Katz",
@@ -342,7 +342,7 @@ test("moves into the named route with context", function() {
 });
 
 test("binds some anchor html tag common attributes", function() {
-  Ember.TEMPLATES.index = Ember.Handlebars.compile("<h3>Home</h3>{{#linkToAnimated index id='self-link' animations='main:fade' title='title-attr'}}Self{{/linkToAnimated}}");
+  Ember.TEMPLATES.index = Ember.Handlebars.compile("<h3>Home</h3>{{#linkToAnimated 'index' id='self-link' animations='main:fade' title='title-attr'}}Self{{/linkToAnimated}}");
   bootApplication();
 
   Ember.run(function() {
@@ -357,7 +357,7 @@ test("accepts string arguments", function() {
     this.route('filter', { path: '/filters/:filter' });
   });
 
-  Ember.TEMPLATES.filter = compile('<p>{{filter}}</p>{{#linkToAnimated filter "unpopular" animations="main:fade" id="link"}}Unpopular{{/linkToAnimated}}');
+  Ember.TEMPLATES.filter = compile('<p>{{filter}}</p>{{#linkToAnimated "filter" "unpopular" animations="main:fade" id="link"}}Unpopular{{/linkToAnimated}}');
   Ember.TEMPLATES.index = compile('');
 
   bootApplication();
@@ -396,7 +396,7 @@ test("unwraps controllers", function() {
   });
 
   Ember.TEMPLATES.filter = compile('<p>{{filter}}</p>');
-  Ember.TEMPLATES.index = compile('{{#linkToAnimated filter this id="link" animations="main:fade"}}Filter{{/linkToAnimated}}');
+  Ember.TEMPLATES.index = compile('{{#linkToAnimated "filter" this id="link" animations="main:fade"}}Filter{{/linkToAnimated}}');
 
   bootApplication();
 
@@ -411,7 +411,7 @@ test("doesn't change view context", function() {
     name: 'test'
   });
 
-  Ember.TEMPLATES.index = Ember.Handlebars.compile("{{view.name}}-{{#linkToAnimated index id='self-link' animations='main:fade'}}Link: {{view.name}}{{/linkToAnimated}}");
+  Ember.TEMPLATES.index = Ember.Handlebars.compile("{{view.name}}-{{#linkToAnimated 'index' id='self-link' animations='main:fade'}}Link: {{view.name}}{{/linkToAnimated}}");
 
   bootApplication();
 
