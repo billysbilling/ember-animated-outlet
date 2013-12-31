@@ -418,58 +418,60 @@ Ember.AnimatedContainerView.registerEffect('fade', function(ct, newView, oldView
         oldEl = oldView.$();
     newEl.addClass('ember-animated-container-fade-new');
     oldEl.addClass('ember-animated-container-fade-old');
-    setTimeout(function() {
+    Ember.run(function() {
         oldEl.addClass('ember-animated-container-fade-old-fading');
-        setTimeout(function() {
+        Ember.run.later(function() {
             newEl.removeClass('ember-animated-container-fade-new');
             callback();
         }, 550);
-    }, 0);
+    });
 });
+
 Ember.AnimatedContainerView.registerEffect('flip', function(ct, newView, oldView, callback) {
     var ctEl = ct.$(),
         newEl = newView.$(),
         oldEl = oldView.$();
-    ctEl.wrap('<div class="ember-animated-container-flip-wrap"></div>')
+    ctEl.wrap('<div class="ember-animated-container-flip-wrap"></div>');
     ctEl.addClass('ember-animated-container-flip-ct');
     newEl.addClass('ember-animated-container-flip-new');
     oldEl.addClass('ember-animated-container-flip-old');
-    setTimeout(function() {
+    Ember.run(function() {
         ctEl.addClass('ember-animated-container-flip-ct-flipping');
-        setTimeout(function() {
+        Ember.run.later(function() {
             ctEl.unwrap();
             ctEl.removeClass('ember-animated-container-flip-ct');
             ctEl.removeClass('ember-animated-container-flip-ct-flipping');
             newEl.removeClass('ember-animated-container-flip-new');
             callback();
         }, 650);
-    }, 0);
+    });
 });
+
 (function() {
     
 var slide = function(ct, newView, oldView, callback, direction, slow) {
     var ctEl = ct.$(),
         newEl = newView.$(),
         duration = slow ? 2050 : 450;
-    ctEl.addClass('ember-animated-container-slide-'+direction+'-ct')
+    ctEl.addClass('ember-animated-container-slide-'+direction+'-ct');
     if (slow) {
-        ctEl.addClass('ember-animated-container-slide-slow-ct')
+        ctEl.addClass('ember-animated-container-slide-slow-ct');
     }
     newEl.addClass('ember-animated-container-slide-'+direction+'-new');
-    setTimeout(function() {
+    Ember.run(function() {
         ctEl.addClass('ember-animated-container-slide-'+direction+'-ct-sliding');
-        setTimeout(function() {
+        Ember.run.later(function() {
             ctEl.removeClass('ember-animated-container-slide-'+direction+'-ct');
             if (slow) {
-                ctEl.removeClass('ember-animated-container-slide-slow-ct')
+                ctEl.removeClass('ember-animated-container-slide-slow-ct');
             }
             ctEl.removeClass('ember-animated-container-slide-'+direction+'-ct-sliding');
             newEl.removeClass('ember-animated-container-slide-'+direction+'-new');
-            setTimeout(function() {
+            Ember.run(function() {
                 callback();
-            }, 0);
+            });
         }, duration);
-    }, 0);
+    });
 };
 
 Ember.AnimatedContainerView.registerEffect('slideLeft', function(ct, newView, oldView, callback) {
@@ -505,6 +507,7 @@ Ember.AnimatedContainerView.registerEffect('slowSlideDown', function(ct, newView
 });
 
 })();
+
 (function() {
 
 var slideOver = function(ct, newView, oldView, callback, direction) {
@@ -512,16 +515,16 @@ var slideOver = function(ct, newView, oldView, callback, direction) {
         newEl = newView.$(),
         duration = 450;
     ctEl.addClass('ember-animated-container-slideOver-old');
-    setTimeout(function() {
+    Ember.run(function() {
         newEl.addClass('ember-animated-container-slideOver-'+direction+'-new');
         newEl.addClass('ember-animated-container-slideOver-'+direction+'-new-sliding');
-        setTimeout(function() {
+        Ember.run.later(function() {
             newEl.removeClass('ember-animated-container-slideOver-'+direction+'-new');
             newEl.removeClass('ember-animated-container-slideOver-'+direction+'-new-sliding');
             ctEl.removeClass('ember-animated-container-slideOver-old');
             callback();
         }, duration);
-    }, 0);
+    });
 };
 
 Ember.AnimatedContainerView.registerEffect('slideOverLeft', function(ct, newView, oldView, callback) {

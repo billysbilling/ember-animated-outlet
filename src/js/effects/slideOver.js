@@ -5,16 +5,16 @@ var slideOver = function(ct, newView, oldView, callback, direction) {
         newEl = newView.$(),
         duration = 450;
     ctEl.addClass('ember-animated-container-slideOver-old');
-    setTimeout(function() {
+    Ember.run(function() {
         newEl.addClass('ember-animated-container-slideOver-'+direction+'-new');
         newEl.addClass('ember-animated-container-slideOver-'+direction+'-new-sliding');
-        setTimeout(function() {
+        Ember.run.later(function() {
             newEl.removeClass('ember-animated-container-slideOver-'+direction+'-new');
             newEl.removeClass('ember-animated-container-slideOver-'+direction+'-new-sliding');
             ctEl.removeClass('ember-animated-container-slideOver-old');
             callback();
         }, duration);
-    }, 0);
+    });
 };
 
 Ember.AnimatedContainerView.registerEffect('slideOverLeft', function(ct, newView, oldView, callback) {
