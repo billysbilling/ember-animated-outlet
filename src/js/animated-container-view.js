@@ -5,6 +5,15 @@
   @namespace Ember
   @extends Ember.ContainerView
 */
+
+(function(){
+  var VERSION = '1.0.0-beta.2';
+  
+  if (Ember.libraries) {
+    Ember.libraries.register('Ember Animated Outlet', VERSION);
+  }
+})();
+
 Ember.AnimatedContainerView = Ember.ContainerView.extend({
 
     classNames: ['ember-animated-container'],
