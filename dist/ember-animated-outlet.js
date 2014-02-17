@@ -1,3 +1,10 @@
+(function(){
+  var VERSION = '1.0.0-beta.2';
+  
+  if (Ember.libraries) {
+    Ember.libraries.register('Ember Animated Outlet', VERSION);
+  }
+})();
 /**
   Write me...
  
