@@ -5,16 +5,16 @@ var zoom = function(ct, newView, oldView, callback, direction) {
         newEl = newView.$(),
         duration = 450;
 
-    ctEl.addClass('ember-animated-container-zoom-'+direction+'-ct')
+    ctEl.addClass('ember-animated-container-zoom-ct')
     
     oldView.addClass('ember-animated-container-zoom-'+direction+'-old');
     newEl.addClass('ember-animated-container-zoom-'+direction+'-new');
     
     setTimeout(function() {
-        ctEl.addClass('ember-animated-container-zoom-'+direction+'-ct-zooming');
+        ctEl.addClass('ember-animated-container-zoom-ct-zooming');
         setTimeout(function() {
             ctEl.removeClass('ember-animated-container-zoom-'+direction+'-ct');            
-            ctEl.removeClass('ember-animated-container-zoom-'+direction+'-ct-zooming');
+            ctEl.removeClass('ember-animated-container-zoom-ct-zooming');
             newEl.removeClass('ember-animated-container-zoom-'+direction+'-new');
             setTimeout(function() {
                 callback();

@@ -1,15 +1,49 @@
-.ember-animated-container-zoom-in-ct > .ember-view {
-    @include transition-property(transform);
-    @include transition-duration(0.4s);
-    @include transition-timing-function(ease-out);
+.ember-animated-container-zoom-in-ct {
+    > .ember-view {
+        @include transition-property(transform);
+        @include transition-property(opacity);
+        @include transition-duration(0.4s);
+        @include transition-timing-function(ease-out);
+    }
+
+    > .ember-animated-container-zoom-in-new,
+    > .ember-animated-container-zoom-out-new {
+        @include transparent;
+    }
+
+    > .ember-animated-container-zoom-in-new {
+        @include transform(scale(0));
+    }
+    
+    > .ember-animated-container-zoom-out-new {
+        @include transform(scale(10));
+    }
+    
+    > .ember-animated-container-zoom-in-old,
+    > .ember-animated-container-zoom-out-old {
+        @include opaque;
+        @include transform(scale(1));
+    }
+    
 }
 
-.ember-animated-container-zoom-in-old,
-.ember-animated-container-zoom-out-new {
-    @include transform(scale(1, 10, 1));
-}
+.ember-animated-container-zoom-ct-zooming {
+    > .ember-animated-container-zoom-in-old,
+    > .ember-animated-container-zoom-out-old {
+        @include transparent;
+    }
 
-.ember-animated-container-zoom-in-new,
-.ember-animated-container-zoom-out-old {
-    @include transform(scale(0, 1, 0));
+    > .ember-animated-container-zoom-in-old {
+        @include transform(scale(10));
+    }
+    
+    > .ember-animated-container-zoom-out-old {
+        @include transform(scale(0));
+    }
+    
+    > .ember-animated-container-zoom-in-new,
+    > .ember-animated-container-zoom-out-new {
+        @include opaque;
+        @include transform(scale(1));
+    }
 }
