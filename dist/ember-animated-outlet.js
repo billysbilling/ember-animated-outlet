@@ -446,7 +446,7 @@ Ember.AnimatedContainerView.registerEffect('flip', function(ct, newView, oldView
     }, 0);
 });
 (function() {
-
+    
 var slide = function(ct, newView, oldView, callback, direction, slow) {
     var ctEl = ct.$(),
         newEl = newView.$(),
@@ -465,7 +465,9 @@ var slide = function(ct, newView, oldView, callback, direction, slow) {
             }
             ctEl.removeClass('ember-animated-container-slide-'+direction+'-ct-sliding');
             newEl.removeClass('ember-animated-container-slide-'+direction+'-new');
-            callback();
+            setTimeout(function() {
+                callback();
+            }, 0);
         }, duration);
     }, 0);
 };
@@ -489,7 +491,7 @@ Ember.AnimatedContainerView.registerEffect('slideDown', function(ct, newView, ol
 Ember.AnimatedContainerView.registerEffect('slowSlideLeft', function(ct, newView, oldView, callback) {
     slide(ct, newView, oldView, callback, 'left', true);
 });
-
+    
 Ember.AnimatedContainerView.registerEffect('slowSlideRight', function(ct, newView, oldView, callback) {
     slide(ct, newView, oldView, callback, 'right', true);
 });
@@ -503,7 +505,6 @@ Ember.AnimatedContainerView.registerEffect('slowSlideDown', function(ct, newView
 });
 
 })();
-
 (function() {
 
 var slideOver = function(ct, newView, oldView, callback, direction) {
