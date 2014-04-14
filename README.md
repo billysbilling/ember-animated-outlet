@@ -142,6 +142,8 @@ You can use the following effects:
 | `slideOverRight` | Same as slideRight, but original view remains in place. Uses CSS transitions. |
 | `slideOverDown` | Same as slideDown, but original view remains in place. Uses CSS transitions. |
 | `slideOverLeft` | Same as slideLeft, but original view remains in place. Uses CSS transitions. |
+| `zoomIn` | An animation where old view fades out and new view fades in while both zoom in. Uses CSS transitions and opacity. |
+| `zoomOut` | An animation where old view fades out and new view fades in while both zoom out. Uses CSS transitions and opacity. |
 
 Is your favorite effect missing? Fork the repo, send a pull request, and make other folks happy, too :-)
 

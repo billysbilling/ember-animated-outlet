@@ -1,0 +1,58 @@
+.ember-animated-container-zoom-in-ct,
+.ember-animated-container-zoom-out-ct {
+    & > .ember-animated-container-zoom-new,
+    & > .ember-animated-container-zoom-old {
+        @include transition-property(transform, opacity);
+        @include transition-duration(0.4s);
+        @include transition-timing-function(ease-out);
+        @include transform-origin(top, center);
+    }
+}
+
+.ember-animated-container-zoom-in-ct {
+    & > .ember-animated-container-zoom-old {
+        @include opaque;
+        @include transform(scale(1));
+    }
+
+    & > .ember-animated-container-zoom-new {
+        @include transparent;
+        @include transform(scale(10));
+    }
+}
+.ember-animated-container-zoom-in-ct.ember-animated-container-zoom-ct-zooming {
+    & > .ember-animated-container-zoom-old {
+        @include transparent;
+        @include transform(scale(0));
+    }
+
+    & > .ember-animated-container-zoom-new {
+        @include opaque;
+        @include transform(scale(1));
+    }
+}
+
+
+.ember-animated-container-zoom-out-ct {
+    & > .ember-animated-container-zoom-old {
+        @include opaque;
+        @include transform(scale(1));
+    }
+
+    & > .ember-animated-container-zoom-new {
+        @include transparent;
+        @include transform(scale(0));
+    }
+}
+
+.ember-animated-container-zoom-out-ct.ember-animated-container-zoom-ct-zooming {
+    & > .ember-animated-container-zoom-old {
+        @include transparent;
+        @include transform(scale(10));
+    }
+
+    & > .ember-animated-container-zoom-new {
+        @include opaque;
+        @include transform(scale(1));
+    }
+}
