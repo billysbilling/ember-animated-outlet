@@ -288,7 +288,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
         params = [].slice.call(arguments, 0, -1),
         hash = options.hash;
 
-    Ember.assert("link-to-animated must contain animations", typeof(hash.animations) == 'string')
+    Ember.assert("link-to-animated must define animations property", typeof(hash.animations) == 'string')
     var re = /\s*([a-z]+)\s*:\s*([a-z]+)/gi;
     var animations = {};
     while (match = re.exec(hash.animations)) {
