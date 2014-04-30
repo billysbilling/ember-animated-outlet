@@ -131,7 +131,7 @@ test("asserts when no animations given", function() {
 
   expectAssertion(function() {
     bootApplication();
-  }, /must contain animations/, "link-to-animated must contain animations");
+  }, /must contain animations/, "link-to-animated must define animations property");
 });
 
 
