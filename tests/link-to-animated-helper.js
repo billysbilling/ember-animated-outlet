@@ -47,7 +47,7 @@ module("The {{link-to-animated}} helper", {
 
       container = App.__container__;
 
-      container.register('view:app');
+      container.register('view:app', AppView);
       container.register('router:main', Router);
     });
   },
@@ -282,7 +282,7 @@ test("moves into the named route with context", function() {
     this.resource("item", { path: "/item/:id" });
   });
 
-  Ember.TEMPLATES.about = Ember.Handlebars.compile("<h3>List</h3><ul>{{#each controller}}<li>{{#link-to-animated 'item' this animations='main:fade'}}{{name}}{{/link-to-animated}}<li>{{/each}}</ul>{{#link-to-animated 'index' animations='main:fade' id='home-link'}}Home{{/link-to-animated}}");
+  Ember.TEMPLATES.about = Ember.Handlebars.compile("<h3>List</h3><ul>{{#each controller}}<li>{{#link-to-animated 'item' this animations='main:fade'}}{{name}}{{/link-to-animated}}</li>{{/each}}</ul>{{#link-to-animated 'index' animations='main:fade' id='home-link'}}Home{{/link-to-animated}}");
 
   var people = {
     yehuda: "Yehuda Katz",
@@ -368,9 +368,8 @@ test("accepts string arguments", function() {
 });
 
 test("unwraps controllers", function() {
-  // The serialize hook is called twice: once to generate the href for the
-  // link and once to generate the URL when the link is clicked.
-  expect(2);
+  // The serialize hook is called four times
+  expect(4);
 
   Router.map(function() {
     this.route('filter', { path: '/filters/:filter' });

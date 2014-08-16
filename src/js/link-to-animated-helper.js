@@ -25,9 +25,16 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
   }
 
   function args(linkView, router, route) {
-    var ret = get(linkView,'routeArgs').slice(),
+    //`routeArgs` is a private property that was renamed to `loadedParams` between Ember 1.6.0 and 1.7.0 (https://github.com/emberjs/ember.js/commit/f7f7748c3316c44ddfa5b0dd4270b47e1bbb8d60#diff-25e24f888eb418fd3daaf17d5dae0a69R495)
+    var routeArgs = get(linkView, 'routeArgs');
+    if (!routeArgs) {
+        var loadedParams = get(linkView, 'loadedParams');
+        routeArgs = [loadedParams.targetRouteName].concat(loadedParams.models);
+    }
+
+    var ret = routeArgs.slice(),
         animations = linkView.parameters.animations;
-    ret.splice(1,0,animations);
+    ret.splice(1, 0, animations);
     return ret;
   }
 
@@ -97,7 +104,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
 
     return Ember.Handlebars.helpers.view.call(this, AnimatedLinkView, options);
   });
-  
+
   /**
     See link-to-animated
 
@@ -114,4 +121,3 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
   });
 
 });
-
