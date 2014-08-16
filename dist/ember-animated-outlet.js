@@ -84,7 +84,7 @@ Ember.AnimatedContainerView = Ember.ContainerView.extend({
             if (oldView && effect) {
                 //If an effect is queued, then start the effect when the new view has been inserted in the DOM
                 this._isAnimating = true;
-                newView.on('didInsertElement', function() {
+                newView.one('didInsertElement', function() {
                     Ember.AnimatedContainerView._effects[effect](self, newView, oldView, function() {
                         Em.run(function() {
                             self.removeObject(oldView);
@@ -236,9 +236,16 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
   }
 
   function args(linkView, router, route) {
-    var ret = get(linkView,'routeArgs').slice(),
+    //`routeArgs` is a private property that was renamed to `loadedParams` between Ember 1.6.0 and 1.7.0 (https://github.com/emberjs/ember.js/commit/f7f7748c3316c44ddfa5b0dd4270b47e1bbb8d60#diff-25e24f888eb418fd3daaf17d5dae0a69R495)
+    var routeArgs = get(linkView, 'routeArgs');
+    if (!routeArgs) {
+        var loadedParams = get(linkView, 'loadedParams');
+        routeArgs = [loadedParams.targetRouteName].concat(loadedParams.models);
+    }
+
+    var ret = routeArgs.slice(),
         animations = linkView.parameters.animations;
-    ret.splice(1,0,animations);
+    ret.splice(1, 0, animations);
     return ret;
   }
 
@@ -308,7 +315,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
 
     return Ember.Handlebars.helpers.view.call(this, AnimatedLinkView, options);
   });
-  
+
   /**
     See link-to-animated
 
@@ -325,7 +332,6 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
   });
 
 });
-
 
 Ember.Router.reopen({
 
@@ -446,7 +452,7 @@ Ember.AnimatedContainerView.registerEffect('flip', function(ct, newView, oldView
     }, 0);
 });
 (function() {
-    
+
 var slide = function(ct, newView, oldView, callback, direction, slow) {
     var ctEl = ct.$(),
         newEl = newView.$(),
@@ -465,9 +471,7 @@ var slide = function(ct, newView, oldView, callback, direction, slow) {
             }
             ctEl.removeClass('ember-animated-container-slide-'+direction+'-ct-sliding');
             newEl.removeClass('ember-animated-container-slide-'+direction+'-new');
-            setTimeout(function() {
-                callback();
-            }, 0);
+            callback();
         }, duration);
     }, 0);
 };
@@ -491,7 +495,7 @@ Ember.AnimatedContainerView.registerEffect('slideDown', function(ct, newView, ol
 Ember.AnimatedContainerView.registerEffect('slowSlideLeft', function(ct, newView, oldView, callback) {
     slide(ct, newView, oldView, callback, 'left', true);
 });
-    
+
 Ember.AnimatedContainerView.registerEffect('slowSlideRight', function(ct, newView, oldView, callback) {
     slide(ct, newView, oldView, callback, 'right', true);
 });
@@ -505,6 +509,7 @@ Ember.AnimatedContainerView.registerEffect('slowSlideDown', function(ct, newView
 });
 
 })();
+
 (function() {
 
 var slideOver = function(ct, newView, oldView, callback, direction) {
