@@ -368,9 +368,8 @@ test("accepts string arguments", function() {
 });
 
 test("unwraps controllers", function() {
-  // The serialize hook is called twice: once to generate the href for the
-  // link and once to generate the URL when the link is clicked.
-  expect(2);
+  // The serialize hook is called four times
+  expect(4);
 
   Router.map(function() {
     this.route('filter', { path: '/filters/:filter' });
