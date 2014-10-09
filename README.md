@@ -61,7 +61,7 @@ you would normally use. You need to give the outlet a name. Example:
 When you want to use the animations from your Handlebars templates, you can use `link-to-animated`. The syntax  for `link-to-animated`is:
 
 ```handlebars
-{{#link-to-animated "invoices.show" animations="main:slideLeft" invoice}}
+{{#link-to-animated "invoices.show" invoice animations="main:slideLeft"}}
 ```
 
 Where:
