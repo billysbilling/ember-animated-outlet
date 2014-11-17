@@ -23,5 +23,11 @@
     "src",
     "tests",
     "vendor"
-  ]
+  ],
+  "devDependencies": {
+    "ember": "~1.7.0",
+    "handlebars": "~1.0.0",
+    "jquery": "~1.9.0",
+    "qunit": "1.11.0"
+  }
 }

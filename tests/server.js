@@ -6,7 +6,7 @@ var app = express();
 
 app.use('/dist', express.static(__dirname + '/../dist'));
 app.use('/tests', express.static(__dirname + '/../tests'));
-app.use('/vendor', express.static(__dirname + '/../vendor'));
+app.use('/bower_components', express.static(__dirname + '/../bower_components'));
 
 app.get('/', function(req, res, callback) {
     childProcess.exec('grunt', function(err, output) {
