@@ -303,7 +303,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
     }
     delete(hash.animations)
     hash.namedRoute = name;
-    hash.currentWhen = hash.currentWhen || name;
+    hash["current-when"] = hash["current-when"] || name;
     hash.disabledBinding = hash.disabledWhen;
 
     hash.parameters = {
