@@ -180,8 +180,9 @@ To be able to build and test you need to have the following installed:
 
 - [Node.js](http://nodejs.org/)
 - The NPM package `grunt-cli` (can be installed via `npm install -g grunt-cli`, [see more here](http://gruntjs.com/getting-started))
+- The NPM package `bower` (can be installed via `npm install -g bower`, [see more here](http://bower.io/#getting-started))
 
-Run `npm install` from the project directory to install dependencies.
+Run `bower install` and `npm install` from the project directory to install dependencies.
 
 ### Building
 
