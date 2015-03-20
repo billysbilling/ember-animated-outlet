@@ -91,6 +91,7 @@ Ember.AnimatedContainerView = Ember.ContainerView.extend({
                             oldView.destroy();
                             //Check to see if there are any queued animations
                             self._isAnimating = false;
+			    $('body').trigger('animated-outlet.animation-finished', [newView]);
                             self._handleAnimationQueue();
                         });
                     });
