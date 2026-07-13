@@ -1,0 +1,11 @@
+# This file is managed by Terraform. Do not edit it directly.
+# To make changes, update the configuration in https://github.com/ageras-com/tf-github
+
+name: CODEOWNERS Check
+
+on:
+  pull_request:
+
+jobs:
+  check-codeowners:
+    uses: ageras-com/github-actions/.github/workflows/codeowners-coverage.yml@v12
