@@ -8,4 +8,4 @@ on:
 
 jobs:
   check-codeowners:
-    uses: ageras-com/github-actions/.github/workflows/codeowners-coverage.yml@v12
+    uses: shine-foundation/github-actions/.github/workflows/github__codeowners-coverage.yml@04398379095273e1797d4c2de65601fe1f78bfb2 # v1.10.0
