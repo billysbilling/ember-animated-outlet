@@ -1,5 +1,6 @@
 # This file is managed by Terraform. Do not edit it directly.
 # To make changes, update the configuration in https://github.com/ageras-com/tf-github
+# Source: shine-foundation/tf-github-modules, modules/components/codeowners
 
 name: CODEOWNERS Check
 
@@ -8,4 +9,4 @@ on:
 
 jobs:
   check-codeowners:
-    uses: shine-foundation/github-actions/.github/workflows/github__codeowners-coverage.yml@04398379095273e1797d4c2de65601fe1f78bfb2 # v1.10.0
+    uses: shine-foundation/github-actions/.github/workflows/github__codeowners-coverage.yml@v3
