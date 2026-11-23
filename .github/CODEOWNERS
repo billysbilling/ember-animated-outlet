@@ -1,4 +1,5 @@
 # This file is managed by Terraform. Do not edit it directly.
 # To make changes, update the configuration in https://github.com/ageras-com/tf-github
+# Source: shine-foundation/tf-github-modules, modules/components/codeowners
 
 * @billysbilling/pt-eng-acctcore-virtualassistant
